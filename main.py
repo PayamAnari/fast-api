@@ -28,6 +28,12 @@ def root():
 @app.post("/posts")
 def create_posts(post: Post):
     post_dict = post.dict()
-    post_dict["id"] = randrange(10000000)
-    my_posts.append()
-    return {"data": "post"}
+    post_dict["id"] = randrange(0, 10000000)
+    my_posts.append(post_dict)
+    return {"data": post_dict}
+
+
+@app.get("/posts/{id}")
+def get_post(id: int):
+    post = my_posts[id - 1]
+    return {"data": post}

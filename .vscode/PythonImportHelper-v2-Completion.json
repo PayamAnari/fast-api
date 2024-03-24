@@ -53,7 +53,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(10000000)\n    my_posts.append()\n    return {\"data\": \"post\"}",
+        "peekOfCode": "def root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
         "detail": "main",
         "documentation": {}
     },
@@ -62,7 +62,16 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(10000000)\n    my_posts.append()\n    return {\"data\": \"post\"}",
+        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):\n    post = my_posts[id - 1]\n    return {\"data\": post}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "get_post",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def get_post(id: int):\n    post = my_posts[id - 1]\n    return {\"data\": post}",
         "detail": "main",
         "documentation": {}
     },
