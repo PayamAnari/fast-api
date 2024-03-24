@@ -28,7 +28,7 @@
         "kind": 6,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):\n    print(new_post.title)\n    return {\"data\": \"new post\"}",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = Treu\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):\n    print(new_post.title)",
         "detail": "main",
         "documentation": {}
     },
@@ -46,7 +46,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):\n    print(new_post.title)",
+        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = Treu\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):",
         "detail": "main",
         "documentation": {}
     }
