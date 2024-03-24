@@ -36,7 +36,7 @@
         "kind": 6,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[int] = None\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/posts\")\ndef create_posts(post: Post):",
         "detail": "main",
         "documentation": {}
     },
@@ -45,7 +45,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def create_posts(new_post: Post):\n    print(new_post)\n    return {\"data\": \"new post\"}",
+        "peekOfCode": "def create_posts(post: Post):\n    print(post.dict())\n    return {\"data\": \"new post\"}",
         "detail": "main",
         "documentation": {}
     },
@@ -54,7 +54,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[int] = None\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")",
+        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/posts\")",
         "detail": "main",
         "documentation": {}
     }

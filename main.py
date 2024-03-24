@@ -10,7 +10,7 @@ class Post(BaseModel):
     title: str
     content: str
     published: bool = True
-    rating: Optional[int] = None
+    rating: Optional[float] = None
 
 
 @app.get("/")
@@ -18,7 +18,7 @@ async def root():
     return {"message": "Hello World!!!"}
 
 
-@app.post("/createposts")
-def create_posts(new_post: Post):
-    print(new_post)
+@app.post("/posts")
+def create_posts(post: Post):
+    print(post.dict())
     return {"data": "new post"}
