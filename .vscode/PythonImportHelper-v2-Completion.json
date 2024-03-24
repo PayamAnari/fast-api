@@ -1,0 +1,53 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Body",
+        "importPath": "fastapi.params",
+        "description": "fastapi.params",
+        "isExtraImport": true,
+        "detail": "fastapi.params",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Post",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):\n    print(new_post.title)\n    return {\"data\": \"new post\"}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "create_posts",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def create_posts(new_post: Post):\n    print(new_post.title)\n    return {\"data\": \"new post\"}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/createposts\")\ndef create_posts(new_post: Post):\n    print(new_post.title)",
+        "detail": "main",
+        "documentation": {}
+    }
+]
