@@ -36,7 +36,16 @@
         "kind": 6,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/posts\")\ndef create_posts(post: Post):",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    print(post.dict())\n    return {\"data\": \"post\"}",
         "detail": "main",
         "documentation": {}
     },
@@ -45,7 +54,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def create_posts(post: Post):\n    print(post.dict())\n    return {\"data\": \"new post\"}",
+        "peekOfCode": "def create_posts(post: Post):\n    print(post.dict())\n    return {\"data\": \"post\"}",
         "detail": "main",
         "documentation": {}
     },
@@ -54,7 +63,16 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Hello World!!!\"}\n@app.post(\"/posts\")",
+        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "my_posts",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "my_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/\")\ndef root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    print(post.dict())",
         "detail": "main",
         "documentation": {}
     }
