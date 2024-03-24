@@ -20,8 +20,8 @@ my_posts = [
 ]
 
 
-@app.get("/")
-def root():
+@app.get("/posts")
+def get_posts():
     return {"data": my_posts}
 
 
@@ -37,3 +37,15 @@ def create_posts(post: Post):
 def get_post(id: int):
     post = my_posts[id - 1]
     return {"data": post}
+
+
+@app.put("/posts/{id}")
+def update_post(id: int, post: Post):
+    my_posts[id - 1] = post.dict()
+    return {"data": my_posts[id - 1]}
+
+
+@app.delete("/posts/{id}")
+def delete_post(id: int):
+    my_posts.pop(id - 1)
+    return {"data": my_posts}

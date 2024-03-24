@@ -44,16 +44,16 @@
         "kind": 6,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/\")",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/posts\")",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "root",
+        "label": "get_posts",
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
+        "peekOfCode": "def get_posts():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
         "detail": "main",
         "documentation": {}
     },
@@ -62,7 +62,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):\n    post = my_posts[id - 1]\n    return {\"data\": post}",
+        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\")",
         "detail": "main",
         "documentation": {}
     },
@@ -71,7 +71,25 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def get_post(id: int):\n    post = my_posts[id - 1]\n    return {\"data\": post}",
+        "peekOfCode": "def get_post(id: int):\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\")\ndef update_post(id: int, post: Post):\n    my_posts[id - 1] = post.dict()\n    return {\"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\")\ndef delete_post(id: int):\n    my_posts.pop(id - 1)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "update_post",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def update_post(id: int, post: Post):\n    my_posts[id - 1] = post.dict()\n    return {\"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\")\ndef delete_post(id: int):\n    my_posts.pop(id - 1)\n    return {\"data\": my_posts}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "delete_post",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def delete_post(id: int):\n    my_posts.pop(id - 1)\n    return {\"data\": my_posts}",
         "detail": "main",
         "documentation": {}
     },
@@ -89,7 +107,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "my_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/\")\ndef root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()",
+        "peekOfCode": "my_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/posts\")\ndef get_posts():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()",
         "detail": "main",
         "documentation": {}
     }
