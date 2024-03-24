@@ -32,6 +32,14 @@
         "documentation": {}
     },
     {
+        "label": "randrange",
+        "importPath": "random",
+        "description": "random",
+        "isExtraImport": true,
+        "detail": "random",
+        "documentation": {}
+    },
+    {
         "label": "Post",
         "kind": 6,
         "importPath": "main",
@@ -45,7 +53,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    print(post.dict())\n    return {\"data\": \"post\"}",
+        "peekOfCode": "def root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(10000000)\n    my_posts.append()\n    return {\"data\": \"post\"}",
         "detail": "main",
         "documentation": {}
     },
@@ -54,7 +62,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def create_posts(post: Post):\n    print(post.dict())\n    return {\"data\": \"post\"}",
+        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(10000000)\n    my_posts.append()\n    return {\"data\": \"post\"}",
         "detail": "main",
         "documentation": {}
     },
@@ -72,7 +80,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "my_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/\")\ndef root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    print(post.dict())",
+        "peekOfCode": "my_posts = [\n    {\"title\": \"Post 1\", \"content\": \"Content 1\", \"published\": True, \"id\": 1},\n    {\"title\": \"Post 2\", \"content\": \"Content 2\", \"published\": False, \"id\": 2},\n]\n@app.get(\"/\")\ndef root():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()",
         "detail": "main",
         "documentation": {}
     }
