@@ -66,4 +66,4 @@ def update_post(id: int, post: Post):
 @app.delete("/posts/{id}")
 def delete_post(id: int):
     my_posts.pop(id - 1)
-    return {"data": my_posts}
+    return {"message": "Post successfully deleted", "data": my_posts}
