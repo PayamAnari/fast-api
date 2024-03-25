@@ -59,11 +59,17 @@ def get_post(id: int):
 
 @app.put("/posts/{id}")
 def update_post(id: int, post: Post):
+
     my_posts[id - 1] = post.dict()
     return {"data": my_posts[id - 1]}
 
 
 @app.delete("/posts/{id}")
 def delete_post(id: int):
+    if id < 1 or id > len(my_posts):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"post with id: {id} was not found",
+        )
     my_posts.pop(id - 1)
     return {"message": "Post successfully deleted", "data": my_posts}
