@@ -8,6 +8,14 @@
         "documentation": {}
     },
     {
+        "label": "Response",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "status",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -87,7 +95,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\")\ndef update_post(id: int, post: Post):",
+        "peekOfCode": "def get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)\ndef update_post(id: int, post: Post):",
         "detail": "main",
         "documentation": {}
     },
@@ -96,7 +104,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def update_post(id: int, post: Post):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts[id - 1] = post.dict()\n    return {\"message\": \"Post successfully updated\", \"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\")\ndef delete_post(id: int):",
+        "peekOfCode": "def update_post(id: int, post: Post):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts[id - 1] = post.dict()\n    return {\"message\": \"Post successfully updated\", \"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\", status_code=status.HTTP_204_NO_CONTENT)\ndef delete_post(id: int):",
         "detail": "main",
         "documentation": {}
     },
@@ -105,7 +113,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def delete_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts.pop(id - 1)\n    return {\"message\": \"Post successfully deleted\", \"data\": my_posts}",
+        "peekOfCode": "def delete_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts.pop(id - 1)\n    return Response(status_code=status.HTTP_204_NO_CONTENT)",
         "detail": "main",
         "documentation": {}
     },
