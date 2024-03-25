@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
@@ -15,8 +15,20 @@ class Post(BaseModel):
 
 
 my_posts = [
-    {"title": "Post 1", "content": "Content 1", "published": True, "id": 1},
-    {"title": "Post 2", "content": "Content 2", "published": False, "id": 2},
+    {
+        "title": "Post 1",
+        "content": "Content 1",
+        "published": True,
+        "rating": 5,
+        "id": 1,
+    },
+    {
+        "title": "Post 2",
+        "content": "Content 2",
+        "published": False,
+        "rating": 4,
+        "id": 2,
+    },
 ]
 
 
@@ -34,7 +46,11 @@ def create_posts(post: Post):
 
 
 @app.get("/posts/{id}")
-def get_post(id: int):
+def get_post(id: int, response: Response):
+
+    if id < 1 or id > len(my_posts):
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"data": "Post not found"}
     post = my_posts[id - 1]
     return {"data": post}
 
