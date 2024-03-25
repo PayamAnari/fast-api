@@ -77,7 +77,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def get_posts():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int, response: Response):",
+        "peekOfCode": "def get_posts():\n    return {\"data\": my_posts}\n@app.post(\"/posts\")\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
         "detail": "main",
         "documentation": {}
     },
@@ -86,7 +86,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int, response: Response):\n    if id < 1 or id > len(my_posts):\n        response.status_code = status.HTTP_404_NOT_FOUND\n        return {\"message\": f\"Post with id: {id} not found\"}",
+        "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,",
         "detail": "main",
         "documentation": {}
     },
@@ -95,7 +95,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def get_post(id: int, response: Response):\n    if id < 1 or id > len(my_posts):\n        response.status_code = status.HTTP_404_NOT_FOUND\n        return {\"message\": f\"Post with id: {id} not found\"}\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\")\ndef update_post(id: int, post: Post):\n    my_posts[id - 1] = post.dict()\n    return {\"data\": my_posts[id - 1]}",
+        "peekOfCode": "def get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\")\ndef update_post(id: int, post: Post):",
         "detail": "main",
         "documentation": {}
     },

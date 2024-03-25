@@ -46,11 +46,13 @@ def create_posts(post: Post):
 
 
 @app.get("/posts/{id}")
-def get_post(id: int, response: Response):
+def get_post(id: int):
 
     if id < 1 or id > len(my_posts):
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {"message": f"Post with id: {id} not found"}
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"post with id: {id} was not found",
+        )
     post = my_posts[id - 1]
     return {"data": post}
 
