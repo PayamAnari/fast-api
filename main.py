@@ -65,7 +65,7 @@ def update_post(id: int, post: Post):
             detail=f"post with id: {id} was not found",
         )
     my_posts[id - 1] = post.dict()
-    return {"data": my_posts[id - 1]}
+    return {"message": "Post successfully updated", "data": my_posts[id - 1]}
 
 
 @app.delete("/posts/{id}")

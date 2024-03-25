@@ -96,7 +96,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def update_post(id: int, post: Post):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts[id - 1] = post.dict()\n    return {\"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\")\ndef delete_post(id: int):",
+        "peekOfCode": "def update_post(id: int, post: Post):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts[id - 1] = post.dict()\n    return {\"message\": \"Post successfully updated\", \"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\")\ndef delete_post(id: int):",
         "detail": "main",
         "documentation": {}
     },
