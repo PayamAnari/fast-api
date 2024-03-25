@@ -66,73 +66,73 @@
     {
         "label": "Post",
         "kind": 6,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\n        \"title\": \"Post 1\",\n        \"content\": \"Content 1\",\n        \"published\": True,",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "get_posts",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "def get_posts():\n    return {\"data\": my_posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"message\": \"Post successfully created\", \"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "create_posts",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "def create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"message\": \"Post successfully created\", \"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "get_post",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "def get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)\ndef update_post(id: int, post: Post):",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "update_post",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "def update_post(id: int, post: Post):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts[id - 1] = post.dict()\n    return {\"message\": \"Post successfully updated\", \"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\", status_code=status.HTTP_204_NO_CONTENT)\ndef delete_post(id: int):",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "delete_post",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "def delete_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts.pop(id - 1)\n    return Response(status_code=status.HTTP_204_NO_CONTENT)",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "app",
         "kind": 5,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\n        \"title\": \"Post 1\",\n        \"content\": \"Content 1\",",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     },
     {
         "label": "my_posts",
         "kind": 5,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "app.main",
+        "description": "app.main",
         "peekOfCode": "my_posts = [\n    {\n        \"title\": \"Post 1\",\n        \"content\": \"Content 1\",\n        \"published\": True,\n        \"rating\": 5,\n        \"id\": 1,\n    },\n    {\n        \"title\": \"Post 2\",",
-        "detail": "main",
+        "detail": "app.main",
         "documentation": {}
     }
 ]
