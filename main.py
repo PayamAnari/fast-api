@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Response, status, HTTPException
+from fastapi import FastAPI, status, HTTPException
 from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
@@ -37,12 +37,12 @@ def get_posts():
     return {"data": my_posts}
 
 
-@app.post("/posts")
+@app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):
     post_dict = post.dict()
     post_dict["id"] = randrange(0, 10000000)
     my_posts.append(post_dict)
-    return {"data": post_dict}
+    return {"message": "Post successfully created", "data": post_dict}
 
 
 @app.get("/posts/{id}")
