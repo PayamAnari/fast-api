@@ -94,7 +94,7 @@
         "kind": 6,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\n        \"title\": \"Post 1\",\n        \"content\": \"Content 1\",\n        \"published\": True,",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nmy_posts = [\n    {\n        \"title\": \"Post 1\",\n        \"content\": \"Content 1\",",
         "detail": "app.main",
         "documentation": {}
     },
@@ -103,7 +103,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published),\n    )",
+        "peekOfCode": "def get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments),\n    )",
         "detail": "app.main",
         "documentation": {}
     },
@@ -112,7 +112,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published),\n    )\n    new_post = cursor.fetchone()\n    conn.commit()\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
+        "peekOfCode": "def create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments),\n    )\n    new_post = cursor.fetchone()\n    conn.commit()\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
         "detail": "app.main",
         "documentation": {}
     },
@@ -121,7 +121,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post = my_posts[id - 1]\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)\ndef update_post(id: int, post: Post):",
+        "peekOfCode": "def get_post(id: int):\n    cursor.execute(\"\"\"SELECT * FROM posts WHERE id=%s\"\"\", (id,))\n    post = cursor.fetchone()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)",
         "detail": "app.main",
         "documentation": {}
     },
@@ -148,7 +148,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    rating: Optional[float] = None\nmy_posts = [\n    {\n        \"title\": \"Post 1\",\n        \"content\": \"Content 1\",",
+        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nmy_posts = [\n    {\n        \"title\": \"Post 1\",",
         "detail": "app.main",
         "documentation": {}
     },

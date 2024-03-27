@@ -14,7 +14,8 @@ class Post(BaseModel):
     title: str
     content: str
     published: bool = True
-    rating: Optional[float] = None
+    likes: int = 0
+    comments: int = 0
 
 
 my_posts = [
@@ -62,7 +63,7 @@ def get_posts():
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):
     cursor.execute(
-        """INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s) RETURNING * """,
+        """INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * """,
         (post.title, post.content, post.published, post.likes, post.comments),
     )
 
@@ -73,13 +74,14 @@ def create_posts(post: Post):
 
 @app.get("/posts/{id}")
 def get_post(id: int):
+    cursor.execute("""SELECT * FROM posts WHERE id=%s""", (id,))
 
-    if id < 1 or id > len(my_posts):
+    post = cursor.fetchone()
+    if not post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"post with id: {id} was not found",
         )
-    post = my_posts[id - 1]
     return {"data": post}
 
 
