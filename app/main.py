@@ -18,23 +18,6 @@ class Post(BaseModel):
     comments: int = 0
 
 
-my_posts = [
-    {
-        "title": "Post 1",
-        "content": "Content 1",
-        "published": True,
-        "rating": 5,
-        "id": 1,
-    },
-    {
-        "title": "Post 2",
-        "content": "Content 2",
-        "published": False,
-        "rating": 4,
-        "id": 2,
-    },
-]
-
 while True:
     try:
         conn = psycopg2.connect(
@@ -103,6 +86,14 @@ def update_post(id: int, post: Post):
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(id: int):
-    cursor.execute("""DELETE FROM posts WHERE id = %s """, (id,))
+    cursor.execute("""DELETE FROM posts WHERE id = %s RETURNING * """, (id,))
+    deleted_post = cursor.fetchone()
     conn.commit()
+
+    if deleted_post is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"post with id: {id} was not found",
+        )
+
     return Response(status_code=status.HTTP_204_NO_CONTENT)
