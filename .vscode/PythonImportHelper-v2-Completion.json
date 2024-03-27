@@ -112,14 +112,6 @@
         "documentation": {}
     },
     {
-        "label": "randrange",
-        "importPath": "random",
-        "description": "random",
-        "isExtraImport": true,
-        "detail": "random",
-        "documentation": {}
-    },
-    {
         "label": "psycopg2",
         "kind": 6,
         "isExtraImport": true,
@@ -191,6 +183,15 @@
         "documentation": {}
     },
     {
+        "label": "get_db",
+        "kind": 2,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "def get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
         "label": "get_posts",
         "kind": 2,
         "importPath": "app.main",
@@ -240,7 +241,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nwhile True:\n    try:\n        conn = psycopg2.connect(",
+        "peekOfCode": "app = FastAPI()\ndef get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()\nclass Post(BaseModel):\n    title: str\n    content: str",
         "detail": "app.main",
         "documentation": {}
     },
