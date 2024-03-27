@@ -88,12 +88,12 @@ def get_post(id: int):
 @app.put("/posts/{id}", status_code=status.HTTP_202_ACCEPTED)
 def update_post(id: int, post: Post):
     cursor.execute(
-        """ UPDATE posts SET title = %s, content = %s, published = %s, likes = %s, comments = %s RETURNING * """,
-        (post.title, post.content, post.published, post.likes, post.comments),
+        """ UPDATE posts SET title = %s, content = %s, published = %s, likes = %s, comments = %s WHERE id = %s RETURNING * """,
+        (post.title, post.content, post.published, post.likes, post.comments, id),
     )
     updated_post = cursor.fetchone()
     conn.commit()
-    if not update_post:
+    if updated_post is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"post with id: {id} was not found",

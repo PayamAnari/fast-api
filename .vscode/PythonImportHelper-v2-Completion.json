@@ -130,7 +130,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def update_post(id: int, post: Post):\n    cursor.execute(\"\"\" SELECT * FROM posts WHERE id=%s\"\"\", (id,))\n    existing_post = cursor.fetchone()\n    if not existing_post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return {\"message\": \"Post successfully updated\", \"data\": my_posts[id - 1]}\n@app.delete(\"/posts/{id}\", status_code=status.HTTP_204_NO_CONTENT)",
+        "peekOfCode": "def update_post(id: int, post: Post):\n    cursor.execute(\n        \"\"\" UPDATE posts SET title = %s, content = %s, published = %s, likes = %s, comments = %s WHERE id = %s RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments, id),\n    )\n    updated_post = cursor.fetchone()\n    conn.commit()\n    if updated_post is None:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,",
         "detail": "app.main",
         "documentation": {}
     },
