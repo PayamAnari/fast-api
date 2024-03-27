@@ -227,7 +227,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()",
+        "peekOfCode": "def get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: schemas.Post, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()",
         "detail": "app.main",
         "documentation": {}
     },
@@ -236,7 +236,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_posts(post: Post, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()\n    db.refresh(new_post)\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int, db: Session = Depends(get_db)):",
+        "peekOfCode": "def create_posts(post: schemas.Post, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()\n    db.refresh(new_post)\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int, db: Session = Depends(get_db)):",
         "detail": "app.main",
         "documentation": {}
     },
@@ -245,7 +245,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_post(id: int, db: Session = Depends(get_db)):\n    post = db.query(models.Post).filter(models.Post.id == id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)\ndef update_post(id: int, updated_post: Post, db: Session = Depends(get_db)):",
+        "peekOfCode": "def get_post(id: int, db: Session = Depends(get_db)):\n    post = db.query(models.Post).filter(models.Post.id == id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)\ndef update_post(id: int, updated_post: schemas.Post, db: Session = Depends(get_db)):",
         "detail": "app.main",
         "documentation": {}
     },
@@ -254,7 +254,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def update_post(id: int, updated_post: Post, db: Session = Depends(get_db)):\n    post_query = db.query(models.Post).filter(models.Post.id == id)\n    post = post_query.first()\n    if post is None:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post_query.update(updated_post.dict(), synchronize_session=False)\n    db.commit()",
+        "peekOfCode": "def update_post(id: int, updated_post: schemas.Post, db: Session = Depends(get_db)):\n    post_query = db.query(models.Post).filter(models.Post.id == id)\n    post = post_query.first()\n    if post is None:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    post_query.update(updated_post.dict(), synchronize_session=False)\n    db.commit()",
         "detail": "app.main",
         "documentation": {}
     },
