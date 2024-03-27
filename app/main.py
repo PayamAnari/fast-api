@@ -87,13 +87,18 @@ def get_post(id: int):
 
 @app.put("/posts/{id}", status_code=status.HTTP_202_ACCEPTED)
 def update_post(id: int, post: Post):
-    if id < 1 or id > len(my_posts):
+    cursor.execute(
+        """ UPDATE posts SET title = %s, content = %s, published = %s, likes = %s, comments = %s RETURNING * """,
+        (post.title, post.content, post.published, post.likes, post.comments),
+    )
+    updated_post = cursor.fetchone()
+    conn.commit()
+    if not update_post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"post with id: {id} was not found",
         )
-    my_posts[id - 1] = post.dict()
-    return {"message": "Post successfully updated", "data": my_posts[id - 1]}
+    return {"message": "Post successfully updated", "data": updated_post}
 
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
