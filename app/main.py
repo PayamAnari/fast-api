@@ -3,6 +3,8 @@ from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
 from random import randrange
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = FastAPI()
 
@@ -31,6 +33,14 @@ my_posts = [
     },
 ]
 
+try:
+    conn = psycopg2.connect(
+        dbname="fastapi",
+        user="postgres",
+        password="2219499",
+        host="localhost",
+        port="5432",
+    )
 
 @app.get("/posts")
 def get_posts():
