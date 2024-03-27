@@ -104,38 +104,6 @@
         "documentation": {}
     },
     {
-        "label": "Body",
-        "importPath": "fastapi.params",
-        "description": "fastapi.params",
-        "isExtraImport": true,
-        "detail": "fastapi.params",
-        "documentation": {}
-    },
-    {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
         "label": "psycopg2",
         "kind": 6,
         "isExtraImport": true,
@@ -175,6 +143,22 @@
         "description": "sqlalchemy.sql.expression",
         "isExtraImport": true,
         "detail": "sqlalchemy.sql.expression",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -227,7 +211,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()",
+        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )",
         "detail": "app.main",
         "documentation": {}
     },
@@ -236,7 +220,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()\n    db.refresh(new_post)\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int, db: Session = Depends(get_db)):",
+        "peekOfCode": "def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()\n    db.refresh(new_post)\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\", response_model=schemas.Post)\ndef get_post(id: int, db: Session = Depends(get_db)):",
         "detail": "app.main",
         "documentation": {}
     },
@@ -245,7 +229,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_post(id: int, db: Session = Depends(get_db)):\n    post = db.query(models.Post).filter(models.Post.id == id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return {\"data\": post}\n@app.put(\"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED)\ndef update_post(",
+        "peekOfCode": "def get_post(id: int, db: Session = Depends(get_db)):\n    post = db.query(models.Post).filter(models.Post.id == id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return post\n@app.put(\n    \"/posts/{id}\", status_code=status.HTTP_202_ACCEPTED, response_model=schemas.Post",
         "detail": "app.main",
         "documentation": {}
     },
@@ -299,7 +283,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class CreatePost(PostBase):\n    pass\nclass UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int",
+        "peekOfCode": "class CreatePost(PostBase):\n    pass\nclass UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass Post(PostBase):\n    id: int",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -308,7 +292,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int",
+        "peekOfCode": "class UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Post",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:\n        orm_mode = True",
         "detail": "app.schemas",
         "documentation": {}
     }

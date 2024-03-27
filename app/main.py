@@ -1,7 +1,4 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends
-from fastapi.params import Body
-from pydantic import BaseModel
-from typing import Optional
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import time
@@ -33,14 +30,16 @@ while True:
         time.sleep(2)
 
 
-@app.get("/posts")
-def get_posts(db: Session = Depends(get_db)):
+@app.get("/posts", response_model=schemas.Post)
+def get_posts(
+    db: Session = Depends(get_db),
+):
     posts = db.query(models.Post).all()
 
-    return {"data": posts}
+    return posts
 
 
-@app.post("/posts", status_code=status.HTTP_201_CREATED)
+@app.post("/posts", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
 def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):
 
     new_post = models.Post(
@@ -52,7 +51,7 @@ def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):
     return {"message": "Post successfully created", "data": new_post}
 
 
-@app.get("/posts/{id}")
+@app.get("/posts/{id}", response_model=schemas.Post)
 def get_post(id: int, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == id).first()
     if not post:
@@ -60,10 +59,12 @@ def get_post(id: int, db: Session = Depends(get_db)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"post with id: {id} was not found",
         )
-    return {"data": post}
+    return post
 
 
-@app.put("/posts/{id}", status_code=status.HTTP_202_ACCEPTED)
+@app.put(
+    "/posts/{id}", status_code=status.HTTP_202_ACCEPTED, response_model=schemas.Post
+)
 def update_post(
     id: int, updated_post: schemas.UpdatePost, db: Session = Depends(get_db)
 ):

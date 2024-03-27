@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class PostBase(BaseModel):
@@ -19,3 +20,11 @@ class UpdatePost(PostBase):
     published: bool
     likes: int
     comments: int
+
+
+class Post(PostBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
