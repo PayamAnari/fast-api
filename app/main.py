@@ -46,9 +46,9 @@ def test_posts(db: Session = Depends(get_db)):
 
 
 @app.get("/posts", status_code=status.HTTP_200_OK)
-def get_posts():
-    cursor.execute("SELECT * FROM posts")
-    posts = cursor.fetchall()
+def get_posts(db: Session = Depends(get_db)):
+    posts = db.query(models.Post).all()
+
     return {"data": posts}
 
 

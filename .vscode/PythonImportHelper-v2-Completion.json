@@ -154,6 +154,22 @@
         "documentation": {}
     },
     {
+        "label": "TIMESTAMP",
+        "importPath": "sqlalchemy.sql.sqltypes",
+        "description": "sqlalchemy.sql.sqltypes",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.sql.sqltypes",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "sqlalchemy.sql.expression",
+        "description": "sqlalchemy.sql.expression",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.sql.expression",
+        "documentation": {}
+    },
+    {
         "label": "get_db",
         "kind": 2,
         "importPath": "app.database",
@@ -212,7 +228,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def test_posts(db: Session = Depends(get_db)):\n    return {\"status\": \"success\"}\n@app.get(\"/posts\", status_code=status.HTTP_200_OK)\ndef get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(",
+        "peekOfCode": "def test_posts(db: Session = Depends(get_db)):\n    return {\"status\": \"success\"}\n@app.get(\"/posts\", status_code=status.HTTP_200_OK)\ndef get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",",
         "detail": "app.main",
         "documentation": {}
     },
@@ -221,7 +237,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments),\n    )",
+        "peekOfCode": "def get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments),\n    )\n    new_post = cursor.fetchone()",
         "detail": "app.main",
         "documentation": {}
     },
@@ -275,7 +291,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    likes = Column(Integer, server_default=\"0\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)",
+        "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    likes = Column(Integer, server_default=\"0\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
         "detail": "app.models",
         "documentation": {}
     }
