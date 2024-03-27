@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Post(BaseModel):
+class PostBase(BaseModel):
     title: str
     content: str
     published: bool = True
@@ -9,9 +9,13 @@ class Post(BaseModel):
     comments: int = 0
 
 
-class CreatePost(BaseModel):
+class CreatePost(PostBase):
+    pass
+
+
+class UpdatePost(PostBase):
     title: str
     content: str
-    published: bool = True
-    likes: int = 0
-    comments: int = 0
+    published: bool
+    likes: int
+    comments: int
