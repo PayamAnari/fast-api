@@ -33,17 +33,22 @@ my_posts = [
     },
 ]
 
-try:
-    conn = psycopg2.connect(
-        dbname="fastapi",
-        user="postgres",
-        password="2219499",
-        host="localhost",
-        port="5432",
-        cursor_factory=RealDictCursor,
-    )
-    cursor = conn.cursor()
-    print("Database connected successfully")
+while True:
+    try:
+        conn = psycopg2.connect(
+            dbname="fast-api",
+            user="postgres",
+            password="2219499",
+            host="localhost",
+            cursor_factory=RealDictCursor,
+        )
+        cursor = conn.cursor()
+        print("Database connected successfully")
+        break
+    except Exception as error:
+        print("Database connection error")
+        print("Error: ", error)
+
 
 @app.get("/posts")
 def get_posts():
