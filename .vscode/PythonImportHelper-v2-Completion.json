@@ -224,20 +224,11 @@
         "documentation": {}
     },
     {
-        "label": "test_posts",
-        "kind": 2,
-        "importPath": "app.main",
-        "description": "app.main",
-        "peekOfCode": "def test_posts(db: Session = Depends(get_db)):\n    return {\"status\": \"success\"}\n@app.get(\"/posts\", status_code=status.HTTP_200_OK)\ndef get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",",
-        "detail": "app.main",
-        "documentation": {}
-    },
-    {
         "label": "get_posts",
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments),\n    )\n    new_post = cursor.fetchone()",
+        "peekOfCode": "def get_posts(db: Session = Depends(get_db)):\n    posts = db.query(models.Post).all()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        title=post.title,\n        content=post.content,\n        published=post.published,\n        likes=post.likes,",
         "detail": "app.main",
         "documentation": {}
     },
@@ -246,7 +237,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published, post.likes, post.comments),\n    )\n    new_post = cursor.fetchone()\n    conn.commit()\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
+        "peekOfCode": "def create_posts(post: Post, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        title=post.title,\n        content=post.content,\n        published=post.published,\n        likes=post.likes,\n        comments=post.comments,\n    )\n    db.add(new_post)\n    db.commit()",
         "detail": "app.main",
         "documentation": {}
     },

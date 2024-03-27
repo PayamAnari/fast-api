@@ -40,11 +40,6 @@ while True:
         time.sleep(2)
 
 
-@app.get("/sqlalchemy")
-def test_posts(db: Session = Depends(get_db)):
-    return {"status": "success"}
-
-
 @app.get("/posts", status_code=status.HTTP_200_OK)
 def get_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
@@ -53,14 +48,18 @@ def get_posts(db: Session = Depends(get_db)):
 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
-def create_posts(post: Post):
-    cursor.execute(
-        """INSERT INTO posts (title, content, published, likes, comments) VALUES (%s, %s, %s, %s, %s) RETURNING * """,
-        (post.title, post.content, post.published, post.likes, post.comments),
-    )
+def create_posts(post: Post, db: Session = Depends(get_db)):
 
-    new_post = cursor.fetchone()
-    conn.commit()
+    new_post = models.Post(
+        title=post.title,
+        content=post.content,
+        published=post.published,
+        likes=post.likes,
+        comments=post.comments,
+    )
+    db.add(new_post)
+    db.commit()
+    db.refresh(new_post)
     return {"message": "Post successfully created", "data": new_post}
 
 
