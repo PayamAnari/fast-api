@@ -1,5 +1,29 @@
 [
     {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "declarative_base",
+        "importPath": "sqlalchemy.ext.declarative",
+        "description": "sqlalchemy.ext.declarative",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.declarative",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -87,6 +111,24 @@
         "importPath": "time",
         "description": "time",
         "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "SQLALCHEMY_DATABASE_URL",
+        "kind": 5,
+        "importPath": "app.database",
+        "description": "app.database",
+        "peekOfCode": "SQLALCHEMY_DATABASE_URL = \"postgresql://postgres:2219499@localhost/fast-api\"\nengine = create_engine(SQLALCHEMY_DATABASE_URL)",
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "app.database",
+        "description": "app.database",
+        "peekOfCode": "engine = create_engine(SQLALCHEMY_DATABASE_URL)",
+        "detail": "app.database",
         "documentation": {}
     },
     {
