@@ -71,19 +71,19 @@ def get_post(id: int, db: Session = Depends(get_db)):
 
 
 @app.put("/posts/{id}", status_code=status.HTTP_202_ACCEPTED)
-def update_post(id: int, post: Post):
-    cursor.execute(
-        """ UPDATE posts SET title = %s, content = %s, published = %s, likes = %s, comments = %s WHERE id = %s RETURNING * """,
-        (post.title, post.content, post.published, post.likes, post.comments, id),
-    )
-    updated_post = cursor.fetchone()
-    conn.commit()
-    if updated_post is None:
+def update_post(id: int, updated_post: Post, db: Session = Depends(get_db)):
+    post_query = db.query(models.Post).filter(models.Post.id == id)
+    post = post_query.first()
+
+    if post is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"post with id: {id} was not found",
         )
-    return {"message": "Post successfully updated", "data": updated_post}
+
+    post_query.update(updated_post.dict(), synchronize_session=False)
+    db.commit()
+    return {"message": "Post successfully updated", "data": post_query.first()}
 
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -97,4 +97,5 @@ def delete_post(id: int, db: Session = Depends(get_db)):
         )
 
     post.delete(synchronize_session=False)
+    db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
