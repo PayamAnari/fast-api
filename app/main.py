@@ -103,10 +103,6 @@ def update_post(id: int, post: Post):
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(id: int):
-    if id < 1 or id > len(my_posts):
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"post with id: {id} was not found",
-        )
-    my_posts.pop(id - 1)
+    cursor.execute("""DELETE FROM posts WHERE id = %s """, (id,))
+    conn.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)

@@ -139,7 +139,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def delete_post(id: int):\n    if id < 1 or id > len(my_posts):\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    my_posts.pop(id - 1)\n    return Response(status_code=status.HTTP_204_NO_CONTENT)",
+        "peekOfCode": "def delete_post(id: int):\n    cursor.execute(\"\"\"DELETE FROM posts WHERE id = %s \"\"\", (id,))\n    conn.commit()\n    return Response(status_code=status.HTTP_204_NO_CONTENT)",
         "detail": "app.main",
         "documentation": {}
     },
