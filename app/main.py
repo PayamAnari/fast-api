@@ -30,7 +30,7 @@ while True:
         time.sleep(2)
 
 
-@app.get("/posts", response_model=schemas.Post)
+@app.get("/posts", response_model=list[schemas.Post])
 def get_posts(
     db: Session = Depends(get_db),
 ):
