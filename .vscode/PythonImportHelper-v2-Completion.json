@@ -120,6 +120,14 @@
         "documentation": {}
     },
     {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "Optional",
         "importPath": "typing",
         "description": "typing",
@@ -215,15 +223,6 @@
         "documentation": {}
     },
     {
-        "label": "Post",
-        "kind": 6,
-        "importPath": "app.main",
-        "description": "app.main",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nwhile True:\n    try:\n        conn = psycopg2.connect(\n            dbname=\"fast-api\",",
-        "detail": "app.main",
-        "documentation": {}
-    },
-    {
         "label": "get_posts",
         "kind": 2,
         "importPath": "app.main",
@@ -273,7 +272,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI()\nclass Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nwhile True:\n    try:\n        conn = psycopg2.connect(",
+        "peekOfCode": "app = FastAPI()\nwhile True:\n    try:\n        conn = psycopg2.connect(\n            dbname=\"fast-api\",\n            user=\"postgres\",\n            password=\"2219499\",\n            host=\"localhost\",\n            cursor_factory=RealDictCursor,\n        )",
         "detail": "app.main",
         "documentation": {}
     },
@@ -284,6 +283,15 @@
         "description": "app.models",
         "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    likes = Column(Integer, server_default=\"0\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
         "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Post",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0",
+        "detail": "app.schemas",
         "documentation": {}
     }
 ]

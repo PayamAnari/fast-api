@@ -14,14 +14,6 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
-class Post(BaseModel):
-    title: str
-    content: str
-    published: bool = True
-    likes: int = 0
-    comments: int = 0
-
-
 while True:
     try:
         conn = psycopg2.connect(
