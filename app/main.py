@@ -40,7 +40,7 @@ while True:
         time.sleep(2)
 
 
-@app.get("/posts", status_code=status.HTTP_200_OK)
+@app.get("/posts")
 def get_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
 
@@ -87,15 +87,14 @@ def update_post(id: int, post: Post):
 
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(id: int):
-    cursor.execute("""DELETE FROM posts WHERE id = %s RETURNING * """, (id,))
-    deleted_post = cursor.fetchone()
-    conn.commit()
+def delete_post(id: int, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == id)
 
-    if deleted_post is None:
+    if post.first() is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"post with id: {id} was not found",
         )
 
+    post.delete(synchronize_session=False)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
