@@ -81,6 +81,15 @@
         "documentation": {}
     },
     {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
         "label": "Post",
         "kind": 6,
         "importPath": "app.main",
@@ -94,7 +103,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts():\n    return {\"data\": my_posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"message\": \"Post successfully created\", \"data\": post_dict}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
+        "peekOfCode": "def get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    post_dict = post.dict()\n    post_dict[\"id\"] = randrange(0, 10000000)\n    my_posts.append(post_dict)\n    return {\"message\": \"Post successfully created\", \"data\": post_dict}",
         "detail": "app.main",
         "documentation": {}
     },
