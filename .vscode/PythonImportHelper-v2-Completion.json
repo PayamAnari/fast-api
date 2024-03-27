@@ -290,7 +290,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0",
+        "peekOfCode": "class Post(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nclass CreatePost(BaseModel):\n    title: str\n    content: str\n    published: bool = True",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "CreatePost",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class CreatePost(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0",
         "detail": "app.schemas",
         "documentation": {}
     }
