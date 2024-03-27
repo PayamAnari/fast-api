@@ -52,7 +52,7 @@ while True:
         time.sleep(2)
 
 
-@app.get("/posts")
+@app.get("/posts", status_code=status.HTTP_200_OK)
 def get_posts():
     cursor.execute("SELECT * FROM posts")
     posts = cursor.fetchall()
@@ -61,10 +61,13 @@ def get_posts():
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):
-    post_dict = post.dict()
-    post_dict["id"] = randrange(0, 10000000)
-    my_posts.append(post_dict)
-    return {"message": "Post successfully created", "data": post_dict}
+    cursor.execute(
+        "INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * ",
+        (post.title, post.content, post.published),
+    )
+
+    new_post = cursor.fetchone()
+    return {"message": "Post successfully created", "data": new_post}
 
 
 @app.get("/posts/{id}")
