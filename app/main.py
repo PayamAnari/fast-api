@@ -40,7 +40,10 @@ try:
         password="2219499",
         host="localhost",
         port="5432",
+        cursor_factory=RealDictCursor,
     )
+    cursor = conn.cursor()
+    print("Database connected successfully")
 
 @app.get("/posts")
 def get_posts():
