@@ -103,7 +103,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * \",\n        (post.title, post.content, post.published),\n    )",
+        "peekOfCode": "def get_posts():\n    cursor.execute(\"SELECT * FROM posts\")\n    posts = cursor.fetchall()\n    return {\"data\": posts}\n@app.post(\"/posts\", status_code=status.HTTP_201_CREATED)\ndef create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published),\n    )",
         "detail": "app.main",
         "documentation": {}
     },
@@ -112,7 +112,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_posts(post: Post):\n    cursor.execute(\n        \"INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * \",\n        (post.title, post.content, post.published),\n    )\n    new_post = cursor.fetchone()\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):\n    if id < 1 or id > len(my_posts):",
+        "peekOfCode": "def create_posts(post: Post):\n    cursor.execute(\n        \"\"\"INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * \"\"\",\n        (post.title, post.content, post.published),\n    )\n    new_post = cursor.fetchone()\n    conn.commit()\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@app.get(\"/posts/{id}\")\ndef get_post(id: int):",
         "detail": "app.main",
         "documentation": {}
     },
