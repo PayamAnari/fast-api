@@ -1,10 +1,10 @@
-from fastapi import FastAPI, Response, status, HTTPException, Depends
+from fastapi import FastAPI
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import time
-from . import models, schemas, utils
-from .database import engine, get_db
-from sqlalchemy.orm import Session
+from . import models
+from .database import engine
+from .routers import post, user
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -27,3 +27,6 @@ while True:
         print("Database connection error")
         print("Error: ", error)
         time.sleep(2)
+
+app.include_router(post.router)
+app.include_router(user.router)

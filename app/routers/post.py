@@ -1,12 +1,13 @@
-from .. import models, schemas, utils
+from .. import models, schemas
 from sqlalchemy.orm import Session
-from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
+from typing import List
+from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
 
 router = APIRouter()
 
 
-@router.get("/posts", response_model=list[schemas.Post])
+@router.get("/posts", response_model=List[schemas.Post])
 def get_posts(
     db: Session = Depends(get_db),
 ):
