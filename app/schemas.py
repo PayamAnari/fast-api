@@ -28,3 +28,11 @@ class Post(PostBase):
 
     class Config:
         orm_mode = True
+
+
+class UserCreate(BaseModel):
+    username: str
+    email: str
+    password: str
+    age: int
+    is_active: bool = True

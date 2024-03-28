@@ -274,7 +274,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class User(Base):\n    __tablename__ = \"users\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    username = Column(String, nullable=False)\n    email = Column(String, nullable=False, unique=True)\n    password = Column(String, nullable=False)\n    age = Column(Integer, nullable=False)\n    is_active = Column(Boolean, default=True, nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
+        "peekOfCode": "class User(Base):\n    __tablename__ = \"users\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    username = Column(String, nullable=False)\n    email = Column(String, nullable=False, unique=True)\n    password = Column(String, nullable=False)\n    age = Column(Integer, nullable=False)\n    is_active = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
         "detail": "app.models",
         "documentation": {}
     },
@@ -310,7 +310,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:\n        orm_mode = True",
+        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: str\n    password: str\n    age: int",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: str\n    password: str\n    age: int\n    is_active: bool = True",
         "detail": "app.schemas",
         "documentation": {}
     }
