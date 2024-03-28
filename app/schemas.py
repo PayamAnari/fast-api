@@ -36,3 +36,4 @@ class UserCreate(BaseModel):
     password: str
     age: int
     is_active: bool = True
+    gender: str

@@ -291,7 +291,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class User(Base):\n    __tablename__ = \"users\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    username = Column(String, nullable=False)\n    email = Column(String, nullable=False, unique=True)\n    password = Column(String, nullable=False)\n    age = Column(Integer, nullable=False)\n    is_active = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
+        "peekOfCode": "class User(Base):\n    __tablename__ = \"users\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    username = Column(String, nullable=False)\n    email = Column(String, nullable=False, unique=True)\n    password = Column(String, nullable=False)\n    age = Column(Integer, nullable=False)\n    is_active = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    gender = Column(String, nullable=False)\n    created_at = Column(",
         "detail": "app.models",
         "documentation": {}
     },
@@ -336,7 +336,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    is_active: bool = True",
+        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    is_active: bool = True\n    gender: str",
         "detail": "app.schemas",
         "documentation": {}
     }
