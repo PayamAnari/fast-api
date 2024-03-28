@@ -1,4 +1,12 @@
-@app.get("/posts", response_model=list[schemas.Post])
+from .. import models, schemas, utils
+from sqlalchemy.orm import Session
+from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
+from ..database import get_db
+
+router = APIRouter()
+
+
+@router.get("/posts", response_model=list[schemas.Post])
 def get_posts(
     db: Session = Depends(get_db),
 ):
@@ -7,7 +15,7 @@ def get_posts(
     return posts
 
 
-@app.post("/posts", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
+@router.post("/posts", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
 def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):
 
     new_post = models.Post(
@@ -19,7 +27,7 @@ def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):
     return {"message": "Post successfully created", "data": new_post}
 
 
-@app.get("/posts/{id}", response_model=schemas.Post)
+@router.get("/posts/{id}", response_model=schemas.Post)
 def get_post(id: int, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == id).first()
     if not post:
@@ -30,7 +38,7 @@ def get_post(id: int, db: Session = Depends(get_db)):
     return post
 
 
-@app.put(
+@router.put(
     "/posts/{id}", status_code=status.HTTP_202_ACCEPTED, response_model=schemas.Post
 )
 def update_post(
@@ -50,7 +58,7 @@ def update_post(
     return {"message": "Post successfully updated", "data": post_query.first()}
 
 
-@app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(id: int, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == id)
 
