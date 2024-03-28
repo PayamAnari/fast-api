@@ -272,7 +272,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()\n    db.refresh(new_user)\n    return {\"message\": \"User successfully created\", \"data\": new_user}",
+        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = pwd_context.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()\n    db.refresh(new_user)\n    return {\"message\": \"User successfully created\", \"data\": new_user}",
         "detail": "app.main",
         "documentation": {}
     },
