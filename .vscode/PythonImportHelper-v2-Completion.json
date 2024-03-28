@@ -277,11 +277,20 @@
         "documentation": {}
     },
     {
+        "label": "get_users",
+        "kind": 2,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "def get_users(db: Session = Depends(get_db)):\n    users = db.query(models.User).all()\n    return users\n@app.get(\"/users/{id}\", response_model=schemas.UserOut)\ndef get_user(id: int, db: Session = Depends(get_db)):\n    user = db.query(models.User).filter(models.User.id == id).first()\n    if not user:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
         "label": "get_user",
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_user(id: int, db: Session = Depends(get_db)):\n    user = db.query(models.User).filter(models.User.id == id).first()\n    if not user:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",\n        )\n    return [user]",
+        "peekOfCode": "def get_user(id: int, db: Session = Depends(get_db)):\n    user = db.query(models.User).filter(models.User.id == id).first()\n    if not user:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",\n        )\n    return user",
         "detail": "app.main",
         "documentation": {}
     },
