@@ -130,14 +130,6 @@
         "documentation": {}
     },
     {
-        "label": "CryptContext",
-        "importPath": "passlib.context",
-        "description": "passlib.context",
-        "isExtraImport": true,
-        "detail": "passlib.context",
-        "documentation": {}
-    },
-    {
         "label": "TIMESTAMP",
         "importPath": "sqlalchemy.sql.sqltypes",
         "description": "sqlalchemy.sql.sqltypes",
@@ -175,6 +167,14 @@
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "CryptContext",
+        "importPath": "passlib.context",
+        "description": "passlib.context",
+        "isExtraImport": true,
+        "detail": "passlib.context",
         "documentation": {}
     },
     {
@@ -272,16 +272,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = pwd_context.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()\n    db.refresh(new_user)\n    return {\"message\": \"User successfully created\", \"data\": new_user}",
-        "detail": "app.main",
-        "documentation": {}
-    },
-    {
-        "label": "pwd_context",
-        "kind": 5,
-        "importPath": "app.main",
-        "description": "app.main",
-        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\nmodels.Base.metadata.create_all(bind=engine)\napp = FastAPI()\nwhile True:\n    try:\n        conn = psycopg2.connect(\n            dbname=\"fast-api\",\n            user=\"postgres\",\n            password=\"2219499\",\n            host=\"localhost\",",
+        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()\n    db.refresh(new_user)\n    return new_user",
         "detail": "app.main",
         "documentation": {}
     },
@@ -353,7 +344,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\nclass UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr",
+        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\n    is_active: bool = True\nclass UserOut(BaseModel):\n    id: int\n    username: str",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -362,8 +353,26 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    age: int\n    is_active: bool\n    gender: str\n    created_at: datetime\n    class Config:\n        orm_mode = True",
+        "peekOfCode": "class UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    age: int\n    gender: str\n    is_active: bool\n    created_at: datetime\n    updated_at: datetime\n    class Config:",
         "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "hash",
+        "kind": 2,
+        "importPath": "app.utils",
+        "description": "app.utils",
+        "peekOfCode": "def hash(password: str):\n    return pwd_context.hash(password)",
+        "detail": "app.utils",
+        "documentation": {}
+    },
+    {
+        "label": "pwd_context",
+        "kind": 5,
+        "importPath": "app.utils",
+        "description": "app.utils",
+        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\ndef hash(password: str):\n    return pwd_context.hash(password)",
+        "detail": "app.utils",
         "documentation": {}
     }
 ]

@@ -36,6 +36,7 @@ class UserCreate(BaseModel):
     password: str
     age: int
     gender: str
+    is_active: bool = True
 
 
 class UserOut(BaseModel):
@@ -43,9 +44,10 @@ class UserOut(BaseModel):
     username: str
     email: EmailStr
     age: int
-    is_active: bool
     gender: str
+    is_active: bool
     created_at: datetime
+    updated_at: datetime
 
     class Config:
         orm_mode = True
