@@ -277,6 +277,15 @@
         "documentation": {}
     },
     {
+        "label": "get_user",
+        "kind": 2,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "def get_user(id: int):",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "app.main",
