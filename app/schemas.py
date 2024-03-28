@@ -51,3 +51,12 @@ class UserOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserUpdate(BaseModel):
+    username: str
+    email: EmailStr
+    password: str
+    age: int
+    gender: str
+    is_active: bool

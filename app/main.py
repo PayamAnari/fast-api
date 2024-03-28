@@ -127,3 +127,25 @@ def get_user(id: int, db: Session = Depends(get_db)):
             detail=f"user with id: {id} was not found",
         )
     return user
+
+
+@app.put("/users/{id}", response_model=schemas.UserOut)
+def update_user(
+    id: int, updated_user: schemas.UserCreate, db: Session = Depends(get_db)
+):
+    user = db.query(models.User).filter(models.User.id == id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"user with id: {id} was not found",
+        )
+    hashed_password = utils.hash(updated_user.password)
+    updated_user.password = hashed_password
+
+    for key, value in updated_user.dict().items():
+        setattr(user, key, value)
+
+    db.commit()
+    db.refresh(user)
+
+    return user

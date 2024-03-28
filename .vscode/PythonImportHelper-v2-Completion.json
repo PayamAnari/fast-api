@@ -290,7 +290,16 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def get_user(id: int, db: Session = Depends(get_db)):\n    user = db.query(models.User).filter(models.User.id == id).first()\n    if not user:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",\n        )\n    return user",
+        "peekOfCode": "def get_user(id: int, db: Session = Depends(get_db)):\n    user = db.query(models.User).filter(models.User.id == id).first()\n    if not user:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",\n        )\n    return user\n@app.put(\"/users/{id}\", response_model=schemas.UserOut)\ndef update_user(",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
+        "label": "update_user",
+        "kind": 2,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "def update_user(\n    id: int, updated_user: schemas.UserCreate, db: Session = Depends(get_db)\n):\n    user = db.query(models.User).filter(models.User.id == id).first()\n    if not user:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",\n        )\n    hashed_password = utils.hash(updated_user.password)",
         "detail": "app.main",
         "documentation": {}
     },
@@ -372,6 +381,15 @@
         "importPath": "app.schemas",
         "description": "app.schemas",
         "peekOfCode": "class UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    age: int\n    gender: str\n    is_active: bool\n    created_at: datetime\n    updated_at: datetime\n    class Config:",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserUpdate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class UserUpdate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\n    is_active: bool",
         "detail": "app.schemas",
         "documentation": {}
     },
