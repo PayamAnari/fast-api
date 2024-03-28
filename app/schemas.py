@@ -37,3 +37,11 @@ class UserCreate(BaseModel):
     age: int
     is_active: bool = True
     gender: str
+
+
+class UserOut(BaseModel):
+    username: str
+    email: EmailStr
+    age: int
+    is_active: bool
+    gender: str
