@@ -304,6 +304,15 @@
         "documentation": {}
     },
     {
+        "label": "delete_user",
+        "kind": 2,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "def delete_user(id: int, db: Session = Depends(get_db)):\n    user = db.query(models.User).filter(models.User.id == id)\n    if user.first() is None:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"user with id: {id} was not found\",\n        )\n    user.delete(synchronize_session=False)\n    db.commit()\n    return Response(status_code=status.HTTP_204_NO_CONTENT)",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "app.main",
