@@ -154,6 +154,14 @@
         "documentation": {}
     },
     {
+        "label": "EmailStr",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -256,7 +264,7 @@
         "kind": 2,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "def create_user():",
+        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()\n    db.refresh(new_user)\n    return {\"message\": \"User successfully created\", \"data\": new_user}",
         "detail": "app.main",
         "documentation": {}
     },
@@ -319,7 +327,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: str\n    password: str\n    age: int",
+        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -328,7 +336,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: str\n    password: str\n    age: int\n    is_active: bool = True",
+        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    is_active: bool = True",
         "detail": "app.schemas",
         "documentation": {}
     }

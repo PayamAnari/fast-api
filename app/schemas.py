@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
 
@@ -32,7 +32,7 @@ class Post(PostBase):
 
 class UserCreate(BaseModel):
     username: str
-    email: str
+    email: EmailStr
     password: str
     age: int
     is_active: bool = True
