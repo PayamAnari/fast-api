@@ -270,6 +270,15 @@
         "documentation": {}
     },
     {
+        "label": "User",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class User(Base):\n    __tablename__ = \"users\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    username = Column(String, nullable=False)\n    email = Column(String, nullable=False, unique=True)\n    password = Column(String, nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False\n    )\n    updated_at = Column(",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "PostBase",
         "kind": 6,
         "importPath": "app.schemas",
