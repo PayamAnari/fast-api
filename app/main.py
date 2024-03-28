@@ -95,3 +95,8 @@ def delete_post(id: int, db: Session = Depends(get_db)):
     post.delete(synchronize_session=False)
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@app.post("/users", status_code=status.HTTP_201_CREATED, response_model=schemas.CreateUser)
+def create_user():
+    

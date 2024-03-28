@@ -252,6 +252,15 @@
         "documentation": {}
     },
     {
+        "label": "create_user",
+        "kind": 2,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "def create_user():",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "app.main",
