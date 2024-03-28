@@ -45,6 +45,7 @@ class UserOut(BaseModel):
     age: int
     is_active: bool
     gender: str
+    created_at: datetime
 
     class Config:
         orm_mode = True

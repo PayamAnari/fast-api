@@ -130,6 +130,14 @@
         "documentation": {}
     },
     {
+        "label": "CryptContext",
+        "importPath": "passlib.context",
+        "description": "passlib.context",
+        "isExtraImport": true,
+        "detail": "passlib.context",
+        "documentation": {}
+    },
+    {
         "label": "TIMESTAMP",
         "importPath": "sqlalchemy.sql.sqltypes",
         "description": "sqlalchemy.sql.sqltypes",
@@ -269,6 +277,15 @@
         "documentation": {}
     },
     {
+        "label": "pwd_context",
+        "kind": 5,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\nmodels.Base.metadata.create_all(bind=engine)\napp = FastAPI()\nwhile True:\n    try:\n        conn = psycopg2.connect(\n            dbname=\"fast-api\",\n            user=\"postgres\",\n            password=\"2219499\",\n            host=\"localhost\",",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "app.main",
@@ -345,7 +362,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserOut(BaseModel):\n    username: str\n    email: EmailStr\n    age: int\n    is_active: bool\n    gender: str\n    class Config:\n        orm_mode = True",
+        "peekOfCode": "class UserOut(BaseModel):\n    username: str\n    email: EmailStr\n    age: int\n    is_active: bool\n    gender: str\n    created_at: datetime\n    class Config:\n        orm_mode = True",
         "detail": "app.schemas",
         "documentation": {}
     }
