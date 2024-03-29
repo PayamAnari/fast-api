@@ -438,7 +438,7 @@
         "kind": 2,
         "importPath": "app.routers.user",
         "description": "app.routers.user",
-        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()\n    db.refresh(new_user)\n    return new_user",
+        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    existing_user = (\n        db.query(models.User).filter(models.User.email == user.email).first()\n    )\n    if existing_user:\n        raise HTTPException(\n            status_code=status.HTTP_400_BAD_REQUEST,\n            detail=\"User with this email already exists\",",
         "detail": "app.routers.user",
         "documentation": {}
     },
@@ -483,7 +483,7 @@
         "kind": 5,
         "importPath": "app.routers.user",
         "description": "app.routers.user",
-        "peekOfCode": "router = APIRouter(prefix=\"/users\", tags=[\"Users\"])\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)\ndef create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()",
+        "peekOfCode": "router = APIRouter(prefix=\"/users\", tags=[\"Users\"])\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)\ndef create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    existing_user = (\n        db.query(models.User).filter(models.User.email == user.email).first()\n    )\n    if existing_user:\n        raise HTTPException(",
         "detail": "app.routers.user",
         "documentation": {}
     },
