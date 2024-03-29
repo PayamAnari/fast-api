@@ -410,7 +410,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def get_post(id: int, db: Session = Depends(get_db)):\n    post = db.query(models.Post).filter(models.Post.id == id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",\n        )\n    return post\n@router.put(\"/{id}\", status_code=status.HTTP_202_ACCEPTED, response_model=schemas.Post)\ndef update_post(",
+        "peekOfCode": "def get_post(\n    id: int,\n    db: Session = Depends(get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",",
         "detail": "app.routers.post",
         "documentation": {}
     },
