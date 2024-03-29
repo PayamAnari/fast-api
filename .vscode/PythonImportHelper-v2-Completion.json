@@ -160,6 +160,22 @@
         "documentation": {}
     },
     {
+        "label": "JWTError",
+        "importPath": "jose",
+        "description": "jose",
+        "isExtraImport": true,
+        "detail": "jose",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "importPath": "jose",
+        "description": "jose",
+        "isExtraImport": true,
+        "detail": "jose",
+        "documentation": {}
+    },
+    {
         "label": "create_engine",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -405,6 +421,33 @@
         "description": "app.routers.user",
         "peekOfCode": "router = APIRouter(prefix=\"/users\", tags=[\"Users\"])\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)\ndef create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()",
         "detail": "app.routers.user",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "app.auth2",
+        "description": "app.auth2",
+        "peekOfCode": "SECRET_KEY = \"09d25e094faa6catrr456r466b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7\"\nALGORITHM = \"HS256\"\nACCESS_TOKEN_EXPIRE_MINUTES = 30",
+        "detail": "app.auth2",
+        "documentation": {}
+    },
+    {
+        "label": "ALGORITHM",
+        "kind": 5,
+        "importPath": "app.auth2",
+        "description": "app.auth2",
+        "peekOfCode": "ALGORITHM = \"HS256\"\nACCESS_TOKEN_EXPIRE_MINUTES = 30",
+        "detail": "app.auth2",
+        "documentation": {}
+    },
+    {
+        "label": "ACCESS_TOKEN_EXPIRE_MINUTES",
+        "kind": 5,
+        "importPath": "app.auth2",
+        "description": "app.auth2",
+        "peekOfCode": "ACCESS_TOKEN_EXPIRE_MINUTES = 30",
+        "detail": "app.auth2",
         "documentation": {}
     },
     {
