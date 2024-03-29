@@ -428,7 +428,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def delete_post(\n    id: int,\n    db: Session = Depends(get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == id)\n    if post.first() is None:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"post with id: {id} was not found\",",
+        "peekOfCode": "def delete_post(\n    id: int,\n    db: Session = Depends(get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post_query = db.query(models.Post).filter(models.Post.id == id)\n    post = post_query.first()\n    if post is None:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,",
         "detail": "app.routers.post",
         "documentation": {}
     },
