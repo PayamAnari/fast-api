@@ -71,3 +71,9 @@ class Token(BaseModel):
     access_token: str
     token_type: str
     expires_in: int
+
+
+class TokenData(BaseModel):
+    email: str = None
+    is_active: bool = None
+    is_verified: bool = None

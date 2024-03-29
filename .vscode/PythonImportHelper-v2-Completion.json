@@ -615,7 +615,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Token(BaseModel):\n    access_token: str\n    token_type: str\n    expires_in: int",
+        "peekOfCode": "class Token(BaseModel):\n    access_token: str\n    token_type: str\n    expires_in: int\nclass TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TokenData",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None",
         "detail": "app.schemas",
         "documentation": {}
     },
