@@ -32,14 +32,6 @@
         "documentation": {}
     },
     {
-        "label": "Response",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "status",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -149,6 +141,14 @@
         "description": "sqlalchemy.orm",
         "isExtraImport": true,
         "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "OAuth2PasswordRequestForm",
+        "importPath": "fastapi.security.oauth2",
+        "description": "fastapi.security.oauth2",
+        "isExtraImport": true,
+        "detail": "fastapi.security.oauth2",
         "documentation": {}
     },
     {
@@ -318,7 +318,7 @@
         "kind": 2,
         "importPath": "app.routers.auth",
         "description": "app.routers.auth",
-        "peekOfCode": "def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.email)\n        .first()\n    )\n    if not user:\n        raise HTTPException(status_code=404, detail=f\"Invalid credentials\")\n    if not utils.verify(user_credentials.password, user.password):\n        raise HTTPException(status_code=404, detail=f\"Invalid credentials\")",
+        "peekOfCode": "def login(\n    user_credentials: OAuth2PasswordRequestForm = Depends(),\n    db: Session = Depends(get_db),\n):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.username)\n        .first()\n    )\n    if not user:",
         "detail": "app.routers.auth",
         "documentation": {}
     },
@@ -327,7 +327,7 @@
         "kind": 5,
         "importPath": "app.routers.auth",
         "description": "app.routers.auth",
-        "peekOfCode": "router = APIRouter(tags=[\"Authentications\"])\n@router.post(\"/login\")\ndef login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.email)\n        .first()\n    )\n    if not user:\n        raise HTTPException(status_code=404, detail=f\"Invalid credentials\")",
+        "peekOfCode": "router = APIRouter(tags=[\"Authentications\"])\n@router.post(\"/login\")\ndef login(\n    user_credentials: OAuth2PasswordRequestForm = Depends(),\n    db: Session = Depends(get_db),\n):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.username)\n        .first()",
         "detail": "app.routers.auth",
         "documentation": {}
     },
@@ -606,16 +606,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserUpdate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\n    is_active: bool\nclass UserLogin(BaseModel):\n    email: EmailStr\n    password: str",
+        "peekOfCode": "class UserUpdate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\n    is_active: bool\n# class UserLogin(BaseModel):\n#     email: EmailStr\n#     password: str",
         "detail": "app.schemas",
         "documentation": {}
     },
     {
-        "label": "UserLogin",
+        "label": "Token",
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserLogin(BaseModel):\n    email: EmailStr\n    password: str",
+        "peekOfCode": "class Token(BaseModel):\n    access_token: str\n    token_type: str\n    expires_in: int",
         "detail": "app.schemas",
         "documentation": {}
     },
