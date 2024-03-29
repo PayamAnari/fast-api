@@ -385,7 +385,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )",
+        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(\n    post: schemas.CreatePost,\n    db: Session = Depends(get_db),\n    user_id: int = Depends(oauth2.get_current_user),",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -394,7 +394,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)\n    db.commit()\n    db.refresh(new_post)\n    return {\"message\": \"Post successfully created\", \"data\": new_post}\n@router.get(\"/{id}\", response_model=schemas.Post)\ndef get_post(id: int, db: Session = Depends(get_db)):",
+        "peekOfCode": "def create_posts(\n    post: schemas.CreatePost,\n    db: Session = Depends(get_db),\n    user_id: int = Depends(oauth2.get_current_user),\n):\n    print(user_id)\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -430,7 +430,7 @@
         "kind": 5,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(",
+        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(\n    post: schemas.CreatePost,",
         "detail": "app.routers.post",
         "documentation": {}
     },
