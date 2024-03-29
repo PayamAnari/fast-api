@@ -240,6 +240,14 @@
         "documentation": {}
     },
     {
+        "label": "ForeignKey",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "declarative_base",
         "importPath": "sqlalchemy.ext.declarative",
         "description": "sqlalchemy.ext.declarative",
@@ -393,7 +401,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def create_posts(\n    post: schemas.CreatePost,\n    db: Session = Depends(get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    print(current_user)\n    new_post = models.Post(\n        **post.dict(),\n    )\n    db.add(new_post)",
+        "peekOfCode": "def create_posts(\n    post: schemas.CreatePost,\n    db: Session = Depends(get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    print(current_user)\n    new_post = models.Post(\n        user_id=current_user.id,\n        **post.dict(),\n    )",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -438,7 +446,7 @@
         "kind": 2,
         "importPath": "app.routers.user",
         "description": "app.routers.user",
-        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    existing_user = (\n        db.query(models.User).filter(models.User.email == user.email).first()\n    )\n    if existing_user:\n        raise HTTPException(\n            status_code=status.HTTP_400_BAD_REQUEST,\n            detail=\"User with this email already exists\",",
+        "peekOfCode": "def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    existing_user = (\n        db.query(models.User).filter(models.User.email == user.email).first()\n    )\n    if existing_user:\n        raise HTTPException(\n            status_code=status.HTTP_409_CONFLICT,\n            detail=\"User with this email already exists\",",
         "detail": "app.routers.user",
         "documentation": {}
     },
@@ -645,7 +653,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:",
+        "peekOfCode": "class UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -654,7 +662,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int",
+        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str",
         "detail": "app.schemas",
         "documentation": {}
     },

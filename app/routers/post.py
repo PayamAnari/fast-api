@@ -25,6 +25,7 @@ def create_posts(
 
     print(current_user)
     new_post = models.Post(
+        user_id=current_user.id,
         **post.dict(),
     )
     db.add(new_post)
