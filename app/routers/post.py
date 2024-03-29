@@ -50,7 +50,7 @@ def get_post(
     if post.user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not allowed to delete this post",
+            detail="Not authorized to perform requested action",
         )
 
     return post
