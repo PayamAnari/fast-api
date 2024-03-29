@@ -291,7 +291,7 @@
         "kind": 5,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(",
+        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n):\n    posts = db.query(models.Post).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(post: schemas.CreatePost, db: Session = Depends(get_db)):\n    new_post = models.Post(",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -345,7 +345,7 @@
         "kind": 5,
         "importPath": "app.routers.user",
         "description": "app.routers.user",
-        "peekOfCode": "router = APIRouter(prefix=\"/users\", tags=[\"users\"])\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)\ndef create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()",
+        "peekOfCode": "router = APIRouter(prefix=\"/users\", tags=[\"Users\"])\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)\ndef create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):\n    hashed_password = utils.hash(user.password)\n    user.password = hashed_password\n    new_user = models.User(\n        **user.dict(),\n    )\n    db.add(new_user)\n    db.commit()",
         "detail": "app.routers.user",
         "documentation": {}
     },

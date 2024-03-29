@@ -4,7 +4,7 @@ from typing import List
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
 
-router = APIRouter(prefix="/posts", tags=["posts"])
+router = APIRouter(prefix="/posts", tags=["Posts"])
 
 
 @router.get("/", response_model=List[schemas.Post])

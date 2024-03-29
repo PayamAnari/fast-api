@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
 
-router = APIRouter(prefix="/users", tags=["users"])
+router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
