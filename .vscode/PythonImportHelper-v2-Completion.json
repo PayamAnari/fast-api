@@ -286,7 +286,7 @@
         "kind": 2,
         "importPath": "app.routers.auth",
         "description": "app.routers.auth",
-        "peekOfCode": "def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.email)\n        .first()\n    )\n    if not user:\n        raise HTTPException(status_code=404, detail=\"Invalid credentials\")\n    return {\"message\": \"Login successfully\"}",
+        "peekOfCode": "def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.email)\n        .first()\n    )\n    if not user:\n        raise HTTPException(status_code=404, detail=f\"Invalid credentials\")\n    return {\"message\": \"Login successfully\"}",
         "detail": "app.routers.auth",
         "documentation": {}
     },
@@ -295,7 +295,7 @@
         "kind": 5,
         "importPath": "app.routers.auth",
         "description": "app.routers.auth",
-        "peekOfCode": "router = APIRouter(prefix=\"/auth\", tags=[\"Authentications\"])\n@router.post(\"/login\")\ndef login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.email)\n        .first()\n    )\n    if not user:\n        raise HTTPException(status_code=404, detail=\"Invalid credentials\")",
+        "peekOfCode": "router = APIRouter(prefix=\"/auth\", tags=[\"Authentications\"])\n@router.post(\"/login\")\ndef login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.email)\n        .first()\n    )\n    if not user:\n        raise HTTPException(status_code=404, detail=f\"Invalid credentials\")",
         "detail": "app.routers.auth",
         "documentation": {}
     },
@@ -556,7 +556,16 @@
         "kind": 2,
         "importPath": "app.utils",
         "description": "app.utils",
-        "peekOfCode": "def hash(password: str):\n    return pwd_context.hash(password)",
+        "peekOfCode": "def hash(password: str):\n    return pwd_context.hash(password)\ndef verify(plain_password, hashed_password):\n    return pwd_context.verify(plain_password, hashed_password)",
+        "detail": "app.utils",
+        "documentation": {}
+    },
+    {
+        "label": "verify",
+        "kind": 2,
+        "importPath": "app.utils",
+        "description": "app.utils",
+        "peekOfCode": "def verify(plain_password, hashed_password):\n    return pwd_context.verify(plain_password, hashed_password)",
         "detail": "app.utils",
         "documentation": {}
     },
@@ -565,7 +574,7 @@
         "kind": 5,
         "importPath": "app.utils",
         "description": "app.utils",
-        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\ndef hash(password: str):\n    return pwd_context.hash(password)",
+        "peekOfCode": "pwd_context = CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")\ndef hash(password: str):\n    return pwd_context.hash(password)\ndef verify(plain_password, hashed_password):\n    return pwd_context.verify(plain_password, hashed_password)",
         "detail": "app.utils",
         "documentation": {}
     }

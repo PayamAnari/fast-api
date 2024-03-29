@@ -16,5 +16,5 @@ def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):
         .first()
     )
     if not user:
-        raise HTTPException(status_code=404, detail="Invalid credentials")
+        raise HTTPException(status_code=404, detail=f"Invalid credentials")
     return {"message": "Login successfully"}
