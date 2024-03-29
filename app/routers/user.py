@@ -1,4 +1,4 @@
-from .. import models, schemas, utils
+from .. import models, schemas, utils, oauth2
 from sqlalchemy.orm import Session
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
@@ -41,7 +41,10 @@ def get_user(id: int, db: Session = Depends(get_db)):
 
 @router.put("/{id}", response_model=schemas.UserOut)
 def update_user(
-    id: int, updated_user: schemas.UserCreate, db: Session = Depends(get_db)
+    id: int,
+    updated_user: schemas.UserCreate,
+    db: Session = Depends(get_db),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
@@ -62,7 +65,11 @@ def update_user(
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_user(id: int, db: Session = Depends(get_db)):
+def delete_user(
+    id: int,
+    db: Session = Depends(get_db),
+    current_user: int = Depends(oauth2.get_current_user),
+):
     user = db.query(models.User).filter(models.User.id == id)
 
     if user.first() is None:
