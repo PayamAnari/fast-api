@@ -20,10 +20,10 @@ def get_posts(
 def create_posts(
     post: schemas.CreatePost,
     db: Session = Depends(get_db),
-    user_id: int = Depends(oauth2.get_current_user),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
 
-    print(user_id)
+    print(current_user)
     new_post = models.Post(
         **post.dict(),
     )
@@ -46,7 +46,10 @@ def get_post(id: int, db: Session = Depends(get_db)):
 
 @router.put("/{id}", status_code=status.HTTP_202_ACCEPTED, response_model=schemas.Post)
 def update_post(
-    id: int, updated_post: schemas.UpdatePost, db: Session = Depends(get_db)
+    id: int,
+    updated_post: schemas.UpdatePost,
+    db: Session = Depends(get_db),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
     post_query = db.query(models.Post).filter(models.Post.id == id)
     post = post_query.first()
@@ -63,7 +66,11 @@ def update_post(
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(id: int, db: Session = Depends(get_db)):
+def delete_post(
+    id: int,
+    db: Session = Depends(get_db),
+    current_user: int = Depends(oauth2.get_current_user),
+):
     post = db.query(models.Post).filter(models.Post.id == id)
 
     if post.first() is None:
