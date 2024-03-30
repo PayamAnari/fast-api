@@ -652,7 +652,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class CreatePost(PostBase):\n    pass\nclass UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass Post(PostBase):\n    id: int",
+        "peekOfCode": "class CreatePost(PostBase):\n    pass\nclass UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass UserOut(BaseModel):\n    id: int",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -661,25 +661,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int",
-        "detail": "app.schemas",
-        "documentation": {}
-    },
-    {
-        "label": "Post",
-        "kind": 6,
-        "importPath": "app.schemas",
-        "description": "app.schemas",
-        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str",
-        "detail": "app.schemas",
-        "documentation": {}
-    },
-    {
-        "label": "UserCreate",
-        "kind": 6,
-        "importPath": "app.schemas",
-        "description": "app.schemas",
-        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\n    is_active: bool = True\nclass UserOut(BaseModel):\n    id: int\n    username: str",
+        "peekOfCode": "class UpdatePost(PostBase):\n    title: str\n    content: str\n    published: bool\n    likes: int\n    comments: int\nclass UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -689,6 +671,24 @@
         "importPath": "app.schemas",
         "description": "app.schemas",
         "peekOfCode": "class UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    age: int\n    gender: str\n    is_active: bool\n    created_at: datetime\n    updated_at: datetime\n    class Config:",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Post",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int\n    owner: UserOut\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int\n    gender: str\n    is_active: bool = True\nclass UserUpdate(BaseModel):\n    username: str\n    email: EmailStr",
         "detail": "app.schemas",
         "documentation": {}
     },

@@ -22,24 +22,6 @@ class UpdatePost(PostBase):
     comments: int
 
 
-class Post(PostBase):
-    id: int
-    created_at: datetime
-    user_id: int
-
-    class Config:
-        orm_mode = True
-
-
-class UserCreate(BaseModel):
-    username: str
-    email: EmailStr
-    password: str
-    age: int
-    gender: str
-    is_active: bool = True
-
-
 class UserOut(BaseModel):
     id: int
     username: str
@@ -52,6 +34,25 @@ class UserOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Post(PostBase):
+    id: int
+    created_at: datetime
+    user_id: int
+    owner: UserOut
+
+    class Config:
+        orm_mode = True
+
+
+class UserCreate(BaseModel):
+    username: str
+    email: EmailStr
+    password: str
+    age: int
+    gender: str
+    is_active: bool = True
 
 
 class UserUpdate(BaseModel):
