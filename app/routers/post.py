@@ -11,8 +11,9 @@ router = APIRouter(prefix="/posts", tags=["Posts"])
 def get_posts(
     db: Session = Depends(get_db),
     limit: int = 10,
+    skip: int = 0,
 ):
-    posts = db.query(models.Post).limit(limit).all()
+    posts = db.query(models.Post).limit(limit).offset(skip).all()
 
     return posts
 
