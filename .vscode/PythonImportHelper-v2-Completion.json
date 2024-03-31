@@ -208,6 +208,14 @@
         "documentation": {}
     },
     {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "create_engine",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -261,32 +269,6 @@
         "description": "sqlalchemy.ext.declarative",
         "isExtraImport": true,
         "detail": "sqlalchemy.ext.declarative",
-        "documentation": {}
-    },
-    {
-        "label": "psycopg2",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "psycopg2",
-        "description": "psycopg2",
-        "detail": "psycopg2",
-        "documentation": {}
-    },
-    {
-        "label": "RealDictCursor",
-        "importPath": "psycopg2.extras",
-        "description": "psycopg2.extras",
-        "isExtraImport": true,
-        "detail": "psycopg2.extras",
-        "documentation": {}
-    },
-    {
-        "label": "time",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "time",
-        "description": "time",
-        "detail": "time",
         "documentation": {}
     },
     {
@@ -400,7 +382,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n):\n    posts = db.query(models.Post).limit(limit).offset(skip).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)\ndef create_posts(\n    post: schemas.CreatePost,",
+        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n    search: Optional[str] = \"\",\n):\n    posts = (\n        db.query(models.Post)\n        .filter(models.Post.title.contains(search))\n        .limit(limit)",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -445,7 +427,7 @@
         "kind": 5,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n):\n    posts = db.query(models.Post).limit(limit).offset(skip).all()\n    return posts\n@router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)",
+        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n    search: Optional[str] = \"\",\n):\n    posts = (\n        db.query(models.Post)",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -553,7 +535,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI()\nwhile True:\n    try:\n        conn = psycopg2.connect(\n            dbname=\"fast-api\",\n            user=\"postgres\",\n            password=\"2219499\",\n            host=\"localhost\",\n            cursor_factory=RealDictCursor,\n        )",
+        "peekOfCode": "app = FastAPI()\napp.include_router(post.router)\napp.include_router(user.router)\napp.include_router(auth.router)",
         "detail": "app.main",
         "documentation": {}
     },
