@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from pydantic.types import conint
 
 
 class PostBase(BaseModel):
@@ -78,3 +79,8 @@ class TokenData(BaseModel):
     email: str = None
     is_active: bool = None
     is_verified: bool = None
+
+
+class Like(BaseModel):
+    post_id: int
+    dir: conint(le=1)

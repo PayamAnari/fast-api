@@ -360,6 +360,14 @@
         "documentation": {}
     },
     {
+        "label": "conint",
+        "importPath": "pydantic.types",
+        "description": "pydantic.types",
+        "isExtraImport": true,
+        "detail": "pydantic.types",
+        "documentation": {}
+    },
+    {
         "label": "CryptContext",
         "importPath": "passlib.context",
         "description": "passlib.context",
@@ -723,7 +731,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Token(BaseModel):\n    access_token: str\n    token_type: str\nclass TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None",
+        "peekOfCode": "class Token(BaseModel):\n    access_token: str\n    token_type: str\nclass TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None\nclass Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -732,7 +740,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None",
+        "peekOfCode": "class TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None\nclass Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Like",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
         "detail": "app.schemas",
         "documentation": {}
     },
