@@ -15,6 +15,13 @@ def like_post(
     db: Session = Depends(database.get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
+    post = db.query(models.Post).filter(models.Post.id == like.post_id).first()
+    if not post:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Post {like.post_id} not found",
+        )
+
     like_query = db.query(models.Like).filter(
         models.Like.post_id == like.post_id, models.Like.user_id == current_user.id
     )

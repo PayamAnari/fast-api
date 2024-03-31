@@ -11,8 +11,8 @@ class Post(Base):
     title = Column(String, nullable=False)
     content = Column(String, nullable=False)
     published = Column(Boolean, server_default="TRUE", nullable=False)
-    likes = Column(Integer, server_default="0", nullable=False)
     comments = Column(Integer, server_default="0", nullable=False)
+    likes = Column(Integer, server_default="0", nullable=False)
     created_at = Column(
         TIMESTAMP(timezone=True), server_default=text("now()"), nullable=False
     )
@@ -48,7 +48,7 @@ class User(Base):
     )
 
 
-class Likes(Base):
+class Like(Base):
     __tablename__ = "likes"
     user_id = Column(
         Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True

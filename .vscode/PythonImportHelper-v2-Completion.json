@@ -454,7 +454,7 @@
         "kind": 2,
         "importPath": "app.routers.like",
         "description": "app.routers.like",
-        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    like_query = db.query(models.Like).filter(\n        models.Like.post_id == like.post_id, models.Like.user_id == current_user.id\n    )\n    found_like = like_query.first()\n    if like.dir == 1:",
+        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == like.post_id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"Post {like.post_id} not found\",",
         "detail": "app.routers.like",
         "documentation": {}
     },
@@ -652,7 +652,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    likes = Column(Integer, server_default=\"0\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
+        "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)\n    likes = Column(Integer, server_default=\"0\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
         "detail": "app.models",
         "documentation": {}
     },
@@ -666,11 +666,11 @@
         "documentation": {}
     },
     {
-        "label": "Likes",
+        "label": "Like",
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Likes(Base):\n    __tablename__ = \"likes\"\n    user_id = Column(\n        Integer, ForeignKey(\"users.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\n    post_id = Column(\n        Integer, ForeignKey(\"posts.id\", ondelete=\"CASCADE\"), primary_key=True\n    )",
+        "peekOfCode": "class Like(Base):\n    __tablename__ = \"likes\"\n    user_id = Column(\n        Integer, ForeignKey(\"users.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\n    post_id = Column(\n        Integer, ForeignKey(\"posts.id\", ondelete=\"CASCADE\"), primary_key=True\n    )",
         "detail": "app.models",
         "documentation": {}
     },
