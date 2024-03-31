@@ -584,6 +584,15 @@
         "documentation": {}
     },
     {
+        "label": "Likes",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Likes(Base):\n    __tablename__ = \"likes\"\n    user_id = Column(\n        Integer, ForeignKey(\"users.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\n    post_id = Column(\n        Integer, ForeignKey(\"posts.id\", ondelete=\"CASCADE\"), primary_key=True\n    )",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "create_access_token",
         "kind": 2,
         "importPath": "app.oauth2",
