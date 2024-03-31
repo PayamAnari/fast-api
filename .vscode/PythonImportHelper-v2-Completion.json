@@ -32,6 +32,54 @@
         "documentation": {}
     },
     {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "Response",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -141,6 +189,14 @@
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
         "documentation": {}
     },
     {
@@ -391,6 +447,24 @@
         "description": "app.routers.auth",
         "peekOfCode": "router = APIRouter(tags=[\"Authentications\"])\n@router.post(\"/login\", response_model=schemas.Token)\ndef login(\n    user_credentials: OAuth2PasswordRequestForm = Depends(),\n    db: Session = Depends(get_db),\n):\n    user = (\n        db.query(models.User)\n        .filter(models.User.email == user_credentials.username)\n        .first()",
         "detail": "app.routers.auth",
+        "documentation": {}
+    },
+    {
+        "label": "like_post",
+        "kind": 2,
+        "importPath": "app.routers.like",
+        "description": "app.routers.like",
+        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == like.post_id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND, detail=\"Post not found\"\n        )",
+        "detail": "app.routers.like",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.routers.like",
+        "description": "app.routers.like",
+        "peekOfCode": "router = APIRouter(\n    prefix=\"/likes\",\n    tags=[\"likes\"],\n)\n@router.post(\"/\", status_code=status.HTTP_201_CREATED)\ndef like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):",
+        "detail": "app.routers.like",
         "documentation": {}
     },
     {
