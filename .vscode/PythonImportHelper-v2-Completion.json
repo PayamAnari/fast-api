@@ -454,7 +454,7 @@
         "kind": 2,
         "importPath": "app.routers.like",
         "description": "app.routers.like",
-        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == like.post_id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND, detail=\"Post not found\"\n        )",
+        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):",
         "detail": "app.routers.like",
         "documentation": {}
     },
