@@ -53,13 +53,26 @@ def get_users(db: Session = Depends(get_db)):
 
 @router.get("/{id}", response_model=schemas.UserOut)
 def get_user(id: int, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.id == id).first()
+    user, favorites = (
+        db.query(models.User, func.count(models.Favorite.post_id).label("favorites"))
+        .outerjoin(models.Favorite, models.Favorite.user_id == models.User.id)
+        .group_by(models.User.id)
+        .filter(models.User.id == id)
+        .first()
+    )
+
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"user with id: {id} was not found",
         )
-    return user
+
+    user_out = schemas.UserOut(
+        **user.__dict__,
+        favorites=favorites,
+    )
+
+    return user_out
 
 
 @router.put("/{id}", response_model=schemas.UserOut)
