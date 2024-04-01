@@ -92,3 +92,8 @@ class TokenData(BaseModel):
 class Like(BaseModel):
     post_id: int
     dir: conint(le=1)
+
+
+class Favorite(BaseModel):
+    post_id: int
+    dir: conint(le=1)
