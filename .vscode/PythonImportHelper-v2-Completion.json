@@ -678,7 +678,16 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Like(Base):\n    __tablename__ = \"likes\"\n    user_id = Column(\n        Integer, ForeignKey(\"users.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\n    post_id = Column(\n        Integer, ForeignKey(\"posts.id\", ondelete=\"CASCADE\"), primary_key=True\n    )",
+        "peekOfCode": "class Like(Base):\n    __tablename__ = \"likes\"\n    user_id = Column(\n        Integer, ForeignKey(\"users.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\n    post_id = Column(\n        Integer, ForeignKey(\"posts.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\nclass Favorite(Base):\n    __tablename__ = \"favorites\"",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Favorite",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Favorite(Base):\n    __tablename__ = \"favorites\"\n    user_id = Column(\n        Integer, ForeignKey(\"users.id\", ondelete=\"CASCADE\"), primary_key=True\n    )\n    post_id = Column(\n        Integer, ForeignKey(\"posts.id\", ondelete=\"CASCADE\"), primary_key=True\n    )",
         "detail": "app.models",
         "documentation": {}
     },
