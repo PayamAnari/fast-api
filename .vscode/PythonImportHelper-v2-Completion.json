@@ -831,7 +831,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None\nclass Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
+        "peekOfCode": "class TokenData(BaseModel):\n    email: str = None\n    is_active: bool = None\n    is_verified: bool = None\nclass Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)\nclass Favorite(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -840,7 +840,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
+        "peekOfCode": "class Like(BaseModel):\n    post_id: int\n    dir: conint(le=1)\nclass Favorite(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Favorite",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class Favorite(BaseModel):\n    post_id: int\n    dir: conint(le=1)",
         "detail": "app.schemas",
         "documentation": {}
     },

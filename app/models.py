@@ -56,3 +56,13 @@ class Like(Base):
     post_id = Column(
         Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key=True
     )
+
+
+class Favorite(Base):
+    __tablename__ = "favorites"
+    user_id = Column(
+        Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    post_id = Column(
+        Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key=True
+    )
