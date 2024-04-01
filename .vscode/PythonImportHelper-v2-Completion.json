@@ -852,7 +852,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    age: int\n    gender: str\n    is_active: bool\n    created_at: datetime\n    updated_at: datetime\n    favorites: int",
+        "peekOfCode": "class UserOut(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    age: int\n    gender: str\n    is_active: bool\n    created_at: datetime\n    updated_at: datetime\n    favorites: int = 0",
         "detail": "app.schemas",
         "documentation": {}
     },

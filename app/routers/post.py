@@ -65,12 +65,6 @@ def get_post(
             detail=f"post with id: {id} was not found",
         )
 
-    if post.user_id != current_user.id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not authorized to perform requested action",
-        )
-
     return post
 
 
