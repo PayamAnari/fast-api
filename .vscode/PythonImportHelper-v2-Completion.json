@@ -454,7 +454,7 @@
         "kind": 2,
         "importPath": "app.routers.like",
         "description": "app.routers.like",
-        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == like.post_id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"Post {like.post_id} not found\",",
+        "peekOfCode": "def like_post(\n    like: schemas.Like,\n    db: Session = Depends(database.get_db),\n    current_user: int = Depends(oauth2.get_current_user),\n):\n    post = db.query(models.Post).filter(models.Post.id == like.post_id).first()\n    if not post:\n        raise HTTPException(\n            status_code=status.HTTP_404_NOT_FOUND,\n            detail=f\"Post with {like.post_id} not found\",",
         "detail": "app.routers.like",
         "documentation": {}
     },
@@ -778,7 +778,16 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int\n    owner: UserOut\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr",
+        "peekOfCode": "class Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int\n    owner: UserOut\n    class Config:\n        orm_mode = True\nclass PostOut(BaseModel):\n    Post: Post\n    likes: int",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "PostOut",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class PostOut(BaseModel):\n    Post: Post\n    likes: int\n    class Config:\n        orm_mode = True\nclass UserCreate(BaseModel):\n    username: str\n    email: EmailStr\n    password: str\n    age: int",
         "detail": "app.schemas",
         "documentation": {}
     },

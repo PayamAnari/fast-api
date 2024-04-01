@@ -19,7 +19,7 @@ def like_post(
     if not post:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Post {like.post_id} not found",
+            detail=f"Post with {like.post_id} not found",
         )
 
     like_query = db.query(models.Like).filter(
