@@ -32,6 +32,7 @@ class UserOut(BaseModel):
     is_active: bool
     created_at: datetime
     updated_at: datetime
+    favorites: int
 
     class Config:
         orm_mode = True

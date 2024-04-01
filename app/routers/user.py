@@ -2,6 +2,7 @@ from .. import models, schemas, utils, oauth2
 from sqlalchemy.orm import Session
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
+from sqlalchemy import func
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -32,9 +33,22 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=list[schemas.UserOut])
 def get_users(db: Session = Depends(get_db)):
-    users = db.query(models.User).all()
+    users = (
+        db.query(models.User, func.count(models.Favorite.post_id).label("favorites"))
+        .outerjoin(models.Favorite, models.Favorite.user_id == models.User.id)
+        .group_by(models.User.id)
+        .all()
+    )
 
-    return users
+    user_out_list = []
+    for user, favorites in users:
+        user_out = schemas.UserOut(
+            **user.__dict__,
+            favorites=favorites,
+        )
+        user_out_list.append(user_out)
+
+    return user_out_list
 
 
 @router.get("/{id}", response_model=schemas.UserOut)
