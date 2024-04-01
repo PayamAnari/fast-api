@@ -3,11 +3,12 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from fastapi import Response, status, HTTPException, Depends, APIRouter
 from ..database import get_db
+from sqlalchemy import func
 
 router = APIRouter(prefix="/posts", tags=["Posts"])
 
 
-@router.get("/", response_model=List[schemas.Post])
+@router.get("/", response_model=List[schemas.PostOut])
 def get_posts(
     db: Session = Depends(get_db),
     limit: int = 10,
@@ -15,7 +16,9 @@ def get_posts(
     search: Optional[str] = "",
 ):
     posts = (
-        db.query(models.Post)
+        db.query(models.Post, func.count(models.Like.post_id).label("likes"))
+        .join(models.Like, models.Like.post_id == models.Post.id, isouter=True)
+        .group_by(models.Post.id)
         .filter(models.Post.title.contains(search))
         .limit(limit)
         .offset(skip)

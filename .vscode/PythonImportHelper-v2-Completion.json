@@ -272,11 +272,11 @@
         "documentation": {}
     },
     {
-        "label": "BaseSettings",
-        "importPath": "pydantic_settings",
-        "description": "pydantic_settings",
+        "label": "func",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
         "isExtraImport": true,
-        "detail": "pydantic_settings",
+        "detail": "sqlalchemy",
         "documentation": {}
     },
     {
@@ -325,6 +325,14 @@
         "description": "sqlalchemy",
         "isExtraImport": true,
         "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
         "documentation": {}
     },
     {
@@ -472,7 +480,7 @@
         "kind": 2,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n    search: Optional[str] = \"\",\n):\n    posts = (\n        db.query(models.Post)\n        .filter(models.Post.title.contains(search))\n        .limit(limit)",
+        "peekOfCode": "def get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n    search: Optional[str] = \"\",\n):\n    posts = (\n        db.query(models.Post, func.count(models.Like.post_id).label(\"likes\"))\n        .join(models.Like, models.Like.post_id == models.Post.id, isouter=True)\n        .group_by(models.Post.id)",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -517,7 +525,7 @@
         "kind": 5,
         "importPath": "app.routers.post",
         "description": "app.routers.post",
-        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.Post])\ndef get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n    search: Optional[str] = \"\",\n):\n    posts = (\n        db.query(models.Post)",
+        "peekOfCode": "router = APIRouter(prefix=\"/posts\", tags=[\"Posts\"])\n@router.get(\"/\", response_model=List[schemas.PostOut])\ndef get_posts(\n    db: Session = Depends(get_db),\n    limit: int = 10,\n    skip: int = 0,\n    search: Optional[str] = \"\",\n):\n    posts = (\n        db.query(models.Post, func.count(models.Like.post_id).label(\"likes\"))",
         "detail": "app.routers.post",
         "documentation": {}
     },
@@ -652,7 +660,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)\n    likes = Column(Integer, server_default=\"0\", nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
+        "peekOfCode": "class Post(Base):\n    __tablename__ = \"posts\"\n    id = Column(Integer, primary_key=True, nullable=False)\n    title = Column(String, nullable=False)\n    content = Column(String, nullable=False)\n    published = Column(Boolean, server_default=\"TRUE\", nullable=False)\n    comments = Column(Integer, server_default=\"0\", nullable=False)\n    location = Column(String, nullable=False)\n    created_at = Column(\n        TIMESTAMP(timezone=True), server_default=text(\"now()\"), nullable=False",
         "detail": "app.models",
         "documentation": {}
     },
@@ -742,7 +750,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class PostBase(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    likes: int = 0\n    comments: int = 0\nclass CreatePost(PostBase):\n    pass\nclass UpdatePost(PostBase):\n    title: str",
+        "peekOfCode": "class PostBase(BaseModel):\n    title: str\n    content: str\n    published: bool = True\n    location: str\n    comments: int = 0\nclass CreatePost(PostBase):\n    pass\nclass UpdatePost(PostBase):\n    title: str",
         "detail": "app.schemas",
         "documentation": {}
     },

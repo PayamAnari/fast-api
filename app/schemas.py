@@ -7,7 +7,7 @@ class PostBase(BaseModel):
     title: str
     content: str
     published: bool = True
-    likes: int = 0
+    location: str
     comments: int = 0
 
 
