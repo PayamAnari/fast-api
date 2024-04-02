@@ -32,17 +32,24 @@ class UserOut(BaseModel):
     is_active: bool
     created_at: datetime
     updated_at: datetime
-    favorites: int = 0
+    favorites: int
 
     class Config:
         orm_mode = True
+
+
+class PostUser(BaseModel):
+    id: int
+    username: str
+    email: EmailStr
+    is_active: bool
 
 
 class Post(PostBase):
     id: int
     created_at: datetime
     user_id: int
-    owner: UserOut
+    owner: PostUser
 
     class Config:
         orm_mode = True
