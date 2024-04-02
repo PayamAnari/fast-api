@@ -52,6 +52,7 @@ def get_post(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
+
     post = (
         db.query(models.Post, func.count(models.Like.post_id).label("likes"))
         .join(models.Like, models.Like.post_id == models.Post.id, isouter=True)
@@ -65,10 +66,10 @@ def get_post(
             detail=f"post with id: {id} was not found",
         )
 
-    if post.user_id != current_user.id:
+    if post[0].user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not authorized to perform requested action",
+            detail="You are not authorized to access this post",
         )
 
     return post
