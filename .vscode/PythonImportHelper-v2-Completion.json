@@ -392,6 +392,14 @@
         "documentation": {}
     },
     {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
         "label": "TIMESTAMP",
         "importPath": "sqlalchemy.sql.sqltypes",
         "description": "sqlalchemy.sql.sqltypes",
@@ -717,7 +725,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI()\napp.include_router(post.router)\napp.include_router(user.router)\napp.include_router(auth.router)\napp.include_router(like.router)\napp.include_router(favorite.router)",
+        "peekOfCode": "app = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\napp.include_router(post.router)\napp.include_router(user.router)",
         "detail": "app.main",
         "documentation": {}
     },
