@@ -65,6 +65,12 @@ def get_post(
             detail=f"post with id: {id} was not found",
         )
 
+    if post.user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to perform requested action",
+        )
+
     return post
 
 
@@ -87,7 +93,7 @@ def update_post(
     if post.user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not allowed to delete this post",
+            detail="Not authorized to perform requested action",
         )
 
     post_query.update(updated_post.dict(), synchronize_session=False)
@@ -113,7 +119,7 @@ def delete_post(
     if post.user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not allowed to delete this post",
+            detail="Not authorized to perform requested action",
         )
 
     post_query.delete(synchronize_session=False)
