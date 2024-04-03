@@ -63,6 +63,20 @@ class PostOut(BaseModel):
         orm_mode = True
 
 
+class UserResponse(BaseModel):
+    id: int
+    username: str
+    email: EmailStr
+    age: int
+    gender: str
+    is_active: bool
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
+
+
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
