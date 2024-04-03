@@ -878,7 +878,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class PostUser(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    is_active: bool\nclass Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int\n    owner: PostUser",
+        "peekOfCode": "class PostUser(BaseModel):\n    id: int\n    username: str\n    email: EmailStr\n    is_active: bool\n    created_at: datetime\nclass Post(PostBase):\n    id: int\n    created_at: datetime\n    user_id: int",
         "detail": "app.schemas",
         "documentation": {}
     },

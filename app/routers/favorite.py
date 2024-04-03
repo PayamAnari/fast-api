@@ -30,7 +30,7 @@ def favorite_post(
         if found_favorite:
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
-                detail=f"User {current_user.id} already Add post {favorite.post_id} to favorites",
+                detail=f"User {current_user.id} has already Added post {favorite.post_id} to favorites",
             )
 
         new_favorite = models.Favorite(
@@ -39,15 +39,17 @@ def favorite_post(
         db.add(new_favorite)
         db.commit()
         return {
-            "message": f"User {current_user.id} add post {favorite.post_id} to favorites"
+            "message": f"Post {favorite.post_id} has been added to favorites for user {current_user.id}"
         }
     else:
         if not found_favorite:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"User {current_user.id} has not liked post {favorite.post_id}",
+                detail=f"User {current_user.id} has not added post {favorite.post_id} to favorites",
             )
 
         favorite_query.delete()
         db.commit()
-        return {"message": f"User {current_user.id} unliked post {favorite.post_id}"}
+        return {
+            "message": f"Post {favorite.post_id} has been removed from favorites for user {current_user.id}"
+        }
