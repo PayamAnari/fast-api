@@ -54,3 +54,6 @@ This repository contains the code for a social media application built with Fast
 ### Like and Favorite
 - **Like Post:** Users can like posts they find interesting. They can only like a post once.
 - **Favorite Post:** Users can add posts to their favorites list for quick access. They can also remove posts from their favorites.
+
+### Search
+- **Search Posts:** Users can search for posts by title.
