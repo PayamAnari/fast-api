@@ -264,3 +264,9 @@ Content-Type: application/json
   "message": "User 1 liked post 1"
 }
 ```
+---
+
+## Acknowledgments
+- **FastAPI Community**
+- **SQLAlchemy Community**
+- **Python Community**
