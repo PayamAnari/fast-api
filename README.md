@@ -85,7 +85,8 @@ This repository contains the code for a social media application built with Fast
 ---
 
 ## API Endpoints
-### User
+
+### Post
 
 | METHOD | ROUTE | FUNCTIONALITY |ACCESS|
 | ------- | ----- | ------------- | ------------- |
@@ -94,3 +95,14 @@ This repository contains the code for a social media application built with Fast
 | *GET* | ```/posts/{id}``` | _Get Post By Id_|_All users_|
 | *PUT*  | ```/posts/{id}``` | Update Post |_All users_|
 | *DELETE*  | ```/posts/{id}``` | Delete Post |_All users_|
+
+
+### User
+
+| METHOD | ROUTE | FUNCTIONALITY |ACCESS|
+| ------- | ----- | ------------- | ------------- |
+| *GET* | ```/users``` | _Get_All_Posts_|_All users_|
+| *POST* | ```/users``` | _Create Posts_|_All users_|
+| *GET* | ```/users/{id}``` | _Get Post By Id_|_All users_|
+| *PUT*  | ```/users/{id}``` | Update Post |_All users_|
+| *DELETE*  | ```/users/{id}``` | Delete Post |_All users_|
