@@ -111,4 +111,11 @@ This repository contains the code for a social media application built with Fast
 
 | METHOD | ROUTE | FUNCTIONALITY |ACCESS|
 | ------- | ----- | ------------- | ------------- |
-| *POST* | ```/login``` | _Login user_|_All users_|
+| *POST* | ```/login``` | _Login user(jwt)_|_All users_|
+
+### Likes
+
+| METHOD | ROUTE | FUNCTIONALITY |ACCESS|
+| ------- | ----- | ------------- | ------------- |
+| *POST* | ```/likes``` | _Create like_|_All users_|
+
