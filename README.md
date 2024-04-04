@@ -125,3 +125,8 @@ This repository contains the code for a social media application built with Fast
 | METHOD | ROUTE | FUNCTIONALITY |ACCESS|
 | ------- | ----- | ------------- | ------------- |
 | *POST* | ```/favorite``` | _Favorite Post_|_All users_|
+
+---
+
+## Installation
+
