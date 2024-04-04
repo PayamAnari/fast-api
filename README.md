@@ -91,7 +91,7 @@ This repository contains the code for a social media application built with Fast
 | METHOD | ROUTE | FUNCTIONALITY |ACCESS|
 | ------- | ----- | ------------- | ------------- |
 | *GET* | ```/posts``` | _Get_All_Posts_|_All users_|
-| *POST* | ```/posts``` | _Create Posts_|_All users_|
+| *POST* | ```/posts``` | _Create Post_|_All users_|
 | *GET* | ```/posts/{id}``` | _Get Post By Id_|_All users_|
 | *PUT*  | ```/posts/{id}``` | Update Post |_All users_|
 | *DELETE*  | ```/posts/{id}``` | Delete Post |_All users_|
@@ -101,8 +101,14 @@ This repository contains the code for a social media application built with Fast
 
 | METHOD | ROUTE | FUNCTIONALITY |ACCESS|
 | ------- | ----- | ------------- | ------------- |
-| *GET* | ```/users``` | _Get_All_Posts_|_All users_|
-| *POST* | ```/users``` | _Create Posts_|_All users_|
-| *GET* | ```/users/{id}``` | _Get Post By Id_|_All users_|
-| *PUT*  | ```/users/{id}``` | Update Post |_All users_|
-| *DELETE*  | ```/users/{id}``` | Delete Post |_All users_|
+| *GET* | ```/users``` | _Get_All_Users_|_All users_|
+| *POST* | ```/users``` | _Create User_|_All users_|
+| *GET* | ```/users/{id}``` | _Get User By Id_|_All users_|
+| *PUT*  | ```/users/{id}``` | Update User |_All users_|
+| *DELETE*  | ```/users/{id}``` | Delete User |_All users_|
+
+### Authentications
+
+| METHOD | ROUTE | FUNCTIONALITY |ACCESS|
+| ------- | ----- | ------------- | ------------- |
+| *POST* | ```/login``` | _Login user_|_All users_|
