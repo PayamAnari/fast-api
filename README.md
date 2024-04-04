@@ -187,3 +187,19 @@ Content-Type: application/json
 
 ```
 
+### Response
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 1,
+  "username": "example_user",
+  "email": "user@example.com",
+  "age": 25,
+  "gender": "male",
+  "is_active": true,
+  "created_at": "2024-04-04T12:00:00",
+  "updated_at": "2024-04-04T12:00:00"
+}
+```
