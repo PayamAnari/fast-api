@@ -81,3 +81,7 @@ This repository contains the code for a social media application built with Fast
   <img src="https://img.shields.io/badge/docker-0000FF?style=for-the-badge&logo=docker&logoColor=white"/>
   <img src="https://img.shields.io/badge/docker compose-4682B4?style=for-the-badge&logo=docker&logoColor=white"/>
 </p>
+
+---
+
+## API Endpoints
