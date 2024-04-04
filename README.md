@@ -130,3 +130,6 @@ This repository contains the code for a social media application built with Fast
 
 ## Installation
 
+1- Clone the repository:
+```
+```
