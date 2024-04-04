@@ -204,7 +204,7 @@ Content-Type: application/json
 }
 ```
 
-## Create Post
+### Create Post
 ### Request
 ```
 POST /posts/
@@ -216,5 +216,29 @@ Content-Type: application/json
   "content": "This is an example post content.",
   "published": true,
   "location": "New York, USA"
+}
+```
+
+### Response
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Example Post",
+  "content": "This is an example post content.",
+  "published": true,
+  "location": "New York, USA",
+  "comments": 0,
+  "created_at": "2024-04-04T12:00:00",
+  "updated_at": "2024-04-04T12:00:00",
+  "user_id": 1,
+  "owner": {
+    "id": 1,
+    "username": "example_user",
+    "email": "user@example.com",
+    "is_active": true
+  }
 }
 ```
