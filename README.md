@@ -50,3 +50,7 @@ This repository contains the code for a social media application built with Fast
 - **Read Post:** Users can view posts, which include details like the title, content, author, creation date, number of likes, and comments.
 - **Update Post:** Users can update their own posts, including modifying the title, content, and published status.
 - **Delete Post:** Users can delete their own posts.
+
+### Like and Favorite
+- **Like Post:** Users can like posts they find interesting. They can only like a post once.
+Favorite Post: Users can add posts to their favorites list for quick access. They can also remove posts from their favorites.
