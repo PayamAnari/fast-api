@@ -255,3 +255,12 @@ Content-Type: application/json
   "dir": 1
 }
 ```
+### Response
+```
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "message": "User 1 liked post 1"
+}
+```
