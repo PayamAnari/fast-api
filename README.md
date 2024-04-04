@@ -130,8 +130,13 @@ This repository contains the code for a social media application built with Fast
 
 ## Installation
 
-1- Clone the repository:
+1- **Clone the repository:**
 ```
 git clone https://github.com/yourusername/fast-api.git
 
 ```
+
+2- **Install dependencies:**
+```
+```
+
