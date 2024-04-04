@@ -57,3 +57,7 @@ This repository contains the code for a social media application built with Fast
 
 ### Search
 - **Search Posts:** Users can search for posts by title.
+
+---
+
+## Technologies Used
