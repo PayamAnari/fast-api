@@ -171,10 +171,7 @@ uvicorn app.main:app --reload
 
 ###  Create User
 ### Request
-```
-POST /users HTTP/1.1
-Host: localhost:8000
-Content-Type: application/json
+
 ```
 POST /users/
 Content-Type: application/json
