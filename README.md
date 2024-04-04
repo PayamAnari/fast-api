@@ -157,5 +157,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=your_access_token_expire_minutes
 ```
 4- **Run the application:**
 ```
+uvicorn app.main:app --reload
+
 ```
 
