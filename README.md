@@ -41,5 +41,5 @@ This repository contains the code for a social media application built with Fast
 
 - **Registration:** Users can register by providing a unique username, email, password, age, and gender.
 - **Authentication:** Authentication is handled using JWT tokens. Upon successful login, users receive an access token which they can use to authenticate subsequent requests.
-Profile Management: Users can update their profile information, such as username, email, password, age, and gender.
+- **Profile Management:** Users can update their profile information, such as username, email, password, age, and gender.
 User Deletion: Users can delete their accounts.
