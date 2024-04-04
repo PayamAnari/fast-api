@@ -165,3 +165,28 @@ uvicorn app.main:app --reload
 
 ```
 
+---
+
+## Example Requests
+
+###  Create User
+### Request
+```
+POST /users HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+```
+POST /users/
+Content-Type: application/json
+
+{
+  "username": "example_user",
+  "email": "user@example.com",
+  "password": "securepassword",
+  "age": 25,
+  "gender": "male",
+  "is_active": true
+}
+
+```
+
