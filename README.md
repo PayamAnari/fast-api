@@ -155,3 +155,7 @@ ALGORITHM=your_algorithm
 ACCESS_TOKEN_EXPIRE_MINUTES=your_access_token_expire_minutes
 
 ```
+4- **Run the application:**
+```
+```
+
