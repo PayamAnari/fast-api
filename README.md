@@ -47,6 +47,6 @@ This repository contains the code for a social media application built with Fast
 ### Post Management
 
 - **Create Post:** Authenticated users can create new posts with a title, content, location, and specify if the post is published or not.
-Read Post: Users can view posts, which include details like the title, content, author, creation date, number of likes, and comments.
+- **Read Post:** Users can view posts, which include details like the title, content, author, creation date, number of likes, and comments.
 Update Post: Users can update their own posts, including modifying the title, content, and published status.
 Delete Post: Users can delete their own posts.
