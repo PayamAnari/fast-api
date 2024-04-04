@@ -135,13 +135,17 @@ This repository contains the code for a social media application built with Fast
 git clone https://github.com/yourusername/fast-api.git
 
 ```
+2- **Create your virtualenv and activate it:**
+```
+Pipenv or virtualenv
+```
 
-2- **Install dependencies:**
+3- **Install dependencies:**
 ```
 pip install -r requirements.txt
 
 ```
-3- **Configure environment variables:**
+4- **Configure environment variables:**
 Create a .env file and set the following variables:
 
 ```
@@ -155,7 +159,7 @@ ALGORITHM=your_algorithm
 ACCESS_TOKEN_EXPIRE_MINUTES=your_access_token_expire_minutes
 
 ```
-4- **Run the application:**
+5- **Run the application:**
 ```
 uvicorn app.main:app --reload
 
