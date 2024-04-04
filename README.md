@@ -36,3 +36,5 @@
 This repository contains the code for a social media application built with FastAPI, a modern Python web framework. The application provides functionalities for users to create, read, update, and delete posts, as well as like and favorite posts. Users can also register, login, and manage their profiles.
 
 ## Features
+
+- **User Management(Dockerized):**
