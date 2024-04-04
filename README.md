@@ -65,6 +65,6 @@ This repository contains the code for a social media application built with Fast
 - **FastAPI:** A modern Python web framework for building APIs with Python type hints.
 - **SQLAlchemy:** A SQL toolkit and Object-Relational Mapping (ORM) library for Python.
 - **PostgreSQL:** A powerful, open-source relational database system.
-Pydantic: Data validation and settings management using Python type annotations.
+- **Pydantic:** Data validation and settings management using Python type annotations.
 JWT (JSON Web Tokens): Authentication mechanism for securing API endpoints.
 Passlib: Password hashing library for securely storing passwords.
