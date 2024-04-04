@@ -6,3 +6,12 @@
 </h1>
 
 ---
+
+<h3 align="center">
+  <strong>
+🛠 Social Media App FastAPI 🛠
+
+  </strong>
+</h3>
+
+---
