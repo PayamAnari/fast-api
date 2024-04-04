@@ -138,5 +138,7 @@ git clone https://github.com/yourusername/fast-api.git
 
 2- **Install dependencies:**
 ```
+pip install -r requirements.txt
+
 ```
 
