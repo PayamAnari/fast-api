@@ -141,4 +141,8 @@ git clone https://github.com/yourusername/fast-api.git
 pip install -r requirements.txt
 
 ```
+3- **Configure environment variables:**
+Create a .env file and set the following variables:
 
+```
+```
