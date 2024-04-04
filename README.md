@@ -203,3 +203,18 @@ Content-Type: application/json
   "updated_at": "2024-04-04T12:00:00"
 }
 ```
+
+## Create Post
+### Request
+```
+POST /posts/
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "title": "Example Post",
+  "content": "This is an example post content.",
+  "published": true,
+  "location": "New York, USA"
+}
+```
