@@ -43,3 +43,10 @@ This repository contains the code for a social media application built with Fast
 - **Authentication:** Authentication is handled using JWT tokens. Upon successful login, users receive an access token which they can use to authenticate subsequent requests.
 - **Profile Management:** Users can update their profile information, such as username, email, password, age, and gender.
 - **User Deletion:** Users can delete their accounts.
+
+### Post Management
+
+- **Create Post:** Authenticated users can create new posts with a title, content, location, and specify if the post is published or not.
+Read Post: Users can view posts, which include details like the title, content, author, creation date, number of likes, and comments.
+Update Post: Users can update their own posts, including modifying the title, content, and published status.
+Delete Post: Users can delete their own posts.
