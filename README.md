@@ -31,10 +31,15 @@
 ---
 
 ## FastAPI Social Media App
-### DEscription
+### Description
 
 This repository contains the code for a social media application built with FastAPI, a modern Python web framework. The application provides functionalities for users to create, read, update, and delete posts, as well as like and favorite posts. Users can also register, login, and manage their profiles.
 
 ## Features
 
-- **User Management(Dockerized):**
+### User Management(Dockerized)
+
+- **Registration:** Users can register by providing a unique username, email, password, age, and gender.
+Authentication: Authentication is handled using JWT tokens. Upon successful login, users receive an access token which they can use to authenticate subsequent requests.
+Profile Management: Users can update their profile information, such as username, email, password, age, and gender.
+User Deletion: Users can delete their accounts.
