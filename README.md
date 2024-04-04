@@ -70,3 +70,14 @@ This repository contains the code for a social media application built with Fast
 - **Passlib:** Password hashing library for securely storing passwords.
 - **Docker:** A platform for developing, shipping, and running applications in containers, providing a consistent environment across different systems.
 - **Docker Compose:** A tool for defining and running multi-container Docker applications, simplifying the process of managing complex containerized environments.
+
+  <p align="left">
+  <img src="https://img.shields.io/badge/fastapi-00008B?style=for-the-badge&logo=django&logoColor=white"/>
+  <img src="https://img.shields.io/badge/django rest framework-acace6?style=for-the-badge&logo=DRF&logoColor=white"/>
+  <img src="https://img.shields.io/badge/djoser-800000?style=for-the-badge&logo=sqlalchemy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"/>
+  <img src="https://img.shields.io/badge/simplejwt-ffa500?style=for-the-badge&logo=simplejwt&logoColor=white"/>
+  <img src="https://img.shields.io/badge/mysql-FF0000?style=for-the-badge&logo=mysql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/docker-0000FF?style=for-the-badge&logo=docker&logoColor=white"/>
+  <img src="https://img.shields.io/badge/docker compose-4682B4?style=for-the-badge&logo=docker&logoColor=white"/>
+</p>
