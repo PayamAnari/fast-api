@@ -242,3 +242,16 @@ Content-Type: application/json
   }
 }
 ```
+
+### Create Like
+### Request
+```
+POST /likes/
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+  "post_id": 1,
+  "dir": 1
+}
+```
