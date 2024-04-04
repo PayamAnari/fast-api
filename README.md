@@ -9,7 +9,7 @@
 
 <h3 align="center">
   <strong>
-🛠 Social Media App FastAPI 🛠
+🛠 FastAPI Social Media App 🛠
 
   </strong>
 </h3>
