@@ -68,3 +68,5 @@ This repository contains the code for a social media application built with Fast
 - **Pydantic:** Data validation and settings management using Python type annotations.
 - **JWT (JSON Web Tokens):** Authentication mechanism for securing API endpoints.
 - **Passlib:** Password hashing library for securely storing passwords.
+- **Docker:** A platform for developing, shipping, and running applications in containers, providing a consistent environment across different systems.
+- **Docker Compose:** A tool for defining and running multi-container Docker applications, simplifying the process of managing complex containerized environments.
