@@ -169,7 +169,7 @@ uvicorn app.main:app --reload
 
 ## Example Requests
 
-###  Create User
+##  Create User
 ### Request
 
 ```
@@ -204,7 +204,7 @@ Content-Type: application/json
 }
 ```
 
-### Create Post
+## Create Post
 ### Request
 ```
 POST /posts/
@@ -243,7 +243,7 @@ Content-Type: application/json
 }
 ```
 
-### Create Like
+## Create Like
 ### Request
 ```
 POST /likes/
