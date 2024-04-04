@@ -145,4 +145,13 @@ pip install -r requirements.txt
 Create a .env file and set the following variables:
 
 ```
+DATABASE_HOSTNAME=your_database_hostname
+DATABASE_PORT=your_database_port
+DATABASE_NAME=your_database_name
+DATABASE_USERNAME=your_database_username
+DATABASE_PASSWORD=your_database_password
+SECRET_KEY=your_secret_key
+ALGORITHM=your_algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES=your_access_token_expire_minutes
+
 ```
