@@ -77,7 +77,7 @@ This repository contains the code for a social media application built with Fast
   <img src="https://img.shields.io/badge/postgresql-800000?style=for-the-badge&logo=postgresql&logoColor=white"/>
   <img src="https://img.shields.io/badge/pydantic-85EA2D?style=for-the-badge&logo=pydantic&logoColor=white"/>
   <img src="https://img.shields.io/badge/jwt-ffa500?style=for-the-badge&logo=wt&logoColor=white"/>
-  <img src="https://img.shields.io/badge/mysql-FF0000?style=for-the-badge&logo=mysql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/passlib-FF0000?style=for-the-badge&logo=passlib&logoColor=white"/>
   <img src="https://img.shields.io/badge/docker-0000FF?style=for-the-badge&logo=docker&logoColor=white"/>
   <img src="https://img.shields.io/badge/docker compose-4682B4?style=for-the-badge&logo=docker&logoColor=white"/>
 </p>
