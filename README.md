@@ -67,4 +67,4 @@ This repository contains the code for a social media application built with Fast
 - **PostgreSQL:** A powerful, open-source relational database system.
 - **Pydantic:** Data validation and settings management using Python type annotations.
 - **JWT (JSON Web Tokens):** Authentication mechanism for securing API endpoints.
-Passlib: Password hashing library for securely storing passwords.
+- **Passlib:** Password hashing library for securely storing passwords.
